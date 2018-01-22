@@ -1,0 +1,470 @@
+ext.deps = [:]
+def versions = [:]
+versions.gradlePlugin = "3.0.1"
+versions.googlePlayService = "3.1.1"
+versions.kotlin = "1.2.20"
+
+versions.supportLibrary = "27.0.2"
+versions.constraintLayout = "1.0.2"
+versions.rxJava = "2.1.3"
+versions.rxAndroid = "2.0.1"
+versions.dagger = "2.11"
+versions.gson = "2.8.2"
+versions.intuit = "1.0.4"
+versions.retrofit = "2.3.0"
+versions.adapterRxjava2 = "2.2.0"
+versions.okHttp = "3.9.0"
+versions.multidex = "1.0.2"
+versions.lifecycle = "1.0.0"
+versions.picasso = "2.5.2"
+versions.okhttp3 = "1.1.0"
+versions.bindingCompiler = "2.3.3"
+versions.arch = "1.0.0"
+versions.runtime = "1.0.3"
+versions.facebook = "4.28.0"
+versions.firebase_auth = "11.6.0"
+versions.firebase_database = "11.6.0"
+versions.firebase_messaging = "11.6.0"
+
+versions.robolectric = "1.1.0"
+versions.junit = "4.12"
+versions.espresso = "3.0.1"
+versions.espresso_lib = "0.1"
+versions.mockwebserver = "3.8.1"
+versions.mockito = "2.7.19"
+versions.mockitoAll = "1.10.19"
+versions.dexmaker = "2.2.0"
+versions.glide = "4.4.0"
+versions.timber = "4.5.1"
+versions.atslRunner = "1.0.1"
+versions.atslRules = "1.0.1"
+versions.hamcrest = "1.3"
+versions.paging = "1.0.0"
+versions.inject = "1"
+versions.annotation_api = "1.2"
+versions.photo = "2.1.3"
+versions.braintree = "2.7.3"
+versions.timeago = "3.0.1"
+versions.lottie = "2.5.0-beta1"
+
+def deps = [:]
+
+def support = [:]
+support.annotations = "com.android.support:support-annotations:$versions.supportLibrary"
+support.app_compat = "com.android.support:appcompat-v7:$versions.supportLibrary"
+support.recycler_view = "com.android.support:recyclerview-v7:$versions.supportLibrary"
+support.card_view = "com.android.support:cardview-v7:$versions.supportLibrary"
+support.design = "com.android.support:design:$versions.supportLibrary"
+support.v4 = "com.android.support:support-v4:$versions.supportLibrary"
+support.core_utils = "com.android.support:support-core-utils:$versions.supportLibrary"
+support.multidex = "com.android.support:multidex:$versions.multidex"
+support.constraint_layout =  "com.android.support.constraint:constraint-layout:$versions.constraintLayout"
+deps.support = support
+
+def room = [:]
+room.runtime = "android.arch.persistence.room:runtime:$versions.arch"
+room.compiler = "android.arch.persistence.room:compiler:$versions.arch"
+room.rxjava2 = "android.arch.persistence.room:rxjava2:$versions.arch"
+room.testing = "android.arch.persistence.room:testing:$versions.arch"
+deps.room = room
+
+def lifecycle = [:]
+lifecycle.runtime = "android.arch.lifecycle:runtime:$versions.runtime"
+lifecycle.extensions = "android.arch.lifecycle:extensions:$versions.arch"
+lifecycle.java8 = "android.arch.lifecycle:common-java8:$versions.arch"
+lifecycle.compiler = "android.arch.lifecycle:compiler:$versions.arch"
+deps.lifecycle = lifecycle
+
+def arch_core = [:]
+arch_core.testing = "android.arch.core:core-testing:$versions.arch"
+deps.arch_core = arch_core
+
+def retrofit = [:]
+retrofit.runtime = "com.squareup.retrofit2:retrofit:$versions.retrofit"
+retrofit.retrofit_adapter_rx2 = "com.squareup.retrofit2:adapter-rxjava2:$versions.retrofit"
+retrofit.retrofit_gson = "com.squareup.retrofit2:converter-gson:$versions.retrofit"
+deps.retrofit = retrofit
+
+def dagger = [:]
+dagger.runtime = "com.google.dagger:dagger:$versions.dagger"
+dagger.android = "com.google.dagger:dagger-android:$versions.dagger"
+dagger.android_support = "com.google.dagger:dagger-android-support:$versions.dagger"
+dagger.compiler = "com.google.dagger:dagger-compiler:$versions.dagger"
+dagger.android_support_compiler = "com.google.dagger:dagger-android-processor:$versions.dagger"
+deps.dagger = dagger
+
+def espresso = [:]
+espresso.core = "com.android.support.test.espresso:espresso-core:$versions.espresso"
+espresso.contrib = "com.android.support.test.espresso:espresso-contrib:$versions.espresso"
+espresso.intents = "com.android.support.test.espresso:espresso-intents:$versions.espresso"
+espresso.lib = "com.android.support.test:testing-support-lib:$versions.espresso_lib"
+deps.espresso = espresso
+
+def atsl = [:]
+atsl.runner = "com.android.support.test:runner:$versions.atslRunner"
+atsl.rules = "com.android.support.test:rules:$versions.atslRunner"
+deps.atsl = atsl
+
+def mockito = [:]
+mockito.core = "org.mockito:mockito-core:$versions.mockito"
+mockito.all = "org.mockito:mockito-all:$versions.mockitoAll"
+deps.mockito = mockito
+
+def robolectric = [:]
+robolectric.robolectric_gradle_plugin = "org.robolectric:robolectric-gradle-plugin:$versions.robolectric"
+robolectric.runtime = "org.robolectric:robolectric:3.5.1"
+deps.robolectric = robolectric
+
+def kotlin = [:]
+kotlin.stdlib = "org.jetbrains.kotlin:kotlin-stdlib:$versions.kotlin"
+kotlin.stdlib7 = "org.jetbrains.kotlin:kotlin-stdlib-jre7:$versions.kotlin"
+kotlin.stdlib8 = "org.jetbrains.kotlin:kotlin-stdlib-jre8:$versions.kotlin"
+kotlin.extensions = "org.jetbrains.kotlin:kotlin-android-extensions:$versions.kotlin"
+kotlin.test = "org.jetbrains.kotlin:kotlin-test-junit:$versions.kotlin"
+kotlin.plugin = "org.jetbrains.kotlin:kotlin-gradle-plugin:$versions.kotlin"
+deps.kotlin = kotlin
+
+def google = [:]
+google.services = "com.google.gms:google-services:$versions.googlePlayService"
+google.firebase_auth = "com.google.firebase:firebase-auth:$versions.firebase_auth"
+google.firebase_database = "com.google.firebase:firebase-database:$versions.firebase_database"
+google.firebase_messaging = "com.google.firebase:firebase-messaging:$versions.firebase_messaging"
+deps.google = google
+
+deps.facebook = "com.facebook.android:facebook-android-sdk:$versions.facebook"
+
+deps.crashlytics_gradle_plugin = "io.fabric.tools:gradle:1.+"
+deps.crashlytics = 'com.crashlytics.sdk.android:crashlytics:2.7.1@aar'
+
+deps.android_gradle_plugin = "com.android.tools.build:gradle:$versions.gradlePlugin"
+deps.binding_compiler = "com.android.databinding:compiler:$versions.bindingCompiler"
+
+deps.okhttp = "com.squareup.okhttp3:okhttp:$versions.okHttp"
+deps.okhttp_logging = "com.squareup.okhttp3:logging-interceptor:$versions.okHttp"
+
+deps.gson = "com.google.code.gson:gson:$versions.gson"
+deps.sdp = "com.intuit.sdp:sdp-android:$versions.intuit"
+deps.ssp = "com.intuit.ssp:ssp-android:$versions.intuit"
+
+deps.rx_android = "io.reactivex.rxjava2:rxandroid:$versions.rxAndroid"
+deps.rx_java2 = "io.reactivex.rxjava2:rxjava:$versions.rxJava"
+deps.javax_inject = "javax.inject:javax.inject:$versions.inject"
+deps.javax_annotation_api = "javax.annotation:javax.annotation-api:$versions.annotation_api"
+
+deps.picasso = "com.squareup.picasso:picasso:$versions.picasso"
+deps.picasso_okhttp3_downloader = "com.jakewharton.picasso:picasso2-okhttp3-downloader:$versions.okhttp3"
+
+deps.glide = "com.github.bumptech.glide:glide:$versions.glide"
+deps.glide_compiler = "com.github.bumptech.glide:compiler:$versions.glide"
+deps.glide_annotations = "com.github.bumptech.glide:annotations:$versions.glide"
+deps.glide_okhttp3_downloader = "com.github.bumptech.glide:okhttp3-integration:$versions.glide"
+
+deps.paging = "android.arch.paging:runtime:$versions.paging"
+deps.dexmaker = "com.linkedin.dexmaker:dexmaker-mockito:$versions.dexmaker"
+deps.timber = "com.jakewharton.timber:timber:$versions.timber"
+deps.junit = "junit:junit:$versions.junit"
+deps.mock_web_server = "com.squareup.okhttp3:mockwebserver:$versions.mockwebserver"
+deps.hamcrest = "org.hamcrest:hamcrest-all:$versions.hamcrest"
+
+deps.photoView = "com.github.chrisbanes:PhotoView:$versions.photo"
+deps.braintree = "com.braintreepayments.api:braintree:$versions.braintree"
+deps.timeago = "com.github.marlonlom:timeago:$versions.timeago"
+deps.lottie = "com.airbnb.android:lottie:$versions.lottie"
+ext.deps = deps
+
+def build_versions = [:]
+build_versions.min_sdk = 16
+build_versions.target_sdk = 27
+build_versions.build_tools = "27.0.2"
+ext.build_versions = build_versions
+
+def signing_configs = [:]
+signing_configs.debug_alias = 'androiddebugkey'
+signing_configs.debug_password = 'android'
+signing_configs.debug_file = "$project.rootDir/settings/keystore/debug.keystore"
+signing_configs.live_alias = 'androiddebugkey'
+signing_configs.live_password = 'android'
+signing_configs.live_file = "$project.rootDir/settings/keystore/debug.keystore"
+ext.signing_configs = signing_configs
+
+def proguard_list = [
+        "$project.rootDir/settings/proguard/proguard-architecture-components.pro",
+        "$project.rootDir/settings/proguard/proguard-crashlytics-2.pro",
+        "$project.rootDir/settings/proguard/proguard-gson.pro",
+        "$project.rootDir/settings/proguard/proguard-project.pro",
+        "$project.rootDir/settings/proguard/proguard-rxjava-rxandroid.pro",
+        "$project.rootDir/settings/proguard/proguard-square-okhttp3.pro",
+        "$project.rootDir/settings/proguard/proguard-square-retrofit.pro",
+        "$project.rootDir/settings/proguard/proguard-support-design.pro",
+        "$project.rootDir/settings/proguard/proguard-support-v4.pro",
+        "$project.rootDir/settings/proguard/proguard-picasso.pro"
+
+]
+ext.proguard_list = proguard_list
+
+def addRepos(RepositoryHandler handler) {
+    handler.google()
+    handler.jcenter()
+    handler.mavenCentral()
+    handler.maven { url 'https://oss.sonatype.org/content/repositories/snapshots' }
+    handler.maven { url 'https://www.jitpack.io' }
+    handler.maven { url 'https://maven.fabric.io/public' }
+    handler.maven { url 'https://maven.google.com' }
+}
+ext.addRepos = this.&addRepos
+
+def addProjectSetting() {
+    ext.productionVersionFilePath = "$project.rootDir/settings/versions/productionVersion.properties"
+    ext.productionErrorVersionFilePath = "$project.rootDir/settings/versions/productionErrorVersion.properties"
+    ext.qaVersionFilePath = "$project.rootDir/settings/versions/qaVersion.properties"
+    ext.qaErrorVersionFilePath = "$project.rootDir/settings/versions/qaErrorVersion.properties"
+    ext.developmentVersionFilePath = "$project.rootDir/settings/versions/developmentVersion.properties"
+    ext.developmentErrorVersionFilePath = "$project.rootDir/settings/versions/developmentErrorVersion.properties"
+
+    ext.productionFlavor = "production"
+    ext.qaFlavor = "qa"
+    ext.developmentFlavor = "development"
+
+    ext.incrementVersionCode = {
+        String buildType = "buildVariant" ->
+            println "-----------------------------------------------------------------------------"
+            println "              Executing VersionCode increment                                "
+            println "-----------------------------------------------------------------------------"
+
+            def versionPropsFile
+            def errorVersionFile
+            if (buildType == productionFlavor) {
+                versionPropsFile = file(project.ext.productionVersionFilePath)
+                errorVersionFile = file(project.ext.productionErrorVersionFilePath)
+            } else if (buildType == qaFlavor) {
+                versionPropsFile = file(project.ext.qaVersionFilePath)
+                errorVersionFile = file(project.ext.qaErrorVersionFilePath)
+            } else if (buildType == developmentFlavor) {
+                versionPropsFile = file(project.ext.developmentVersionFilePath)
+                errorVersionFile = file(project.ext.developmentErrorVersionFilePath)
+            } else
+                throw new GradleException("Unknown app variant type")
+
+            if (versionPropsFile.canRead()) {
+                def version = project.ext.readVersionFile(buildType)
+                def errorVersion = project.ext.readErrorVersionFile(buildType)
+                def build = version['VERSION_CODE'] as int
+                errorVersion['VERSION_CODE'] = build.toString()
+                build++
+                version['VERSION_CODE'] = build.toString()
+
+                def stream = new FileOutputStream(versionPropsFile)
+                try {
+                    version.store(stream, null);
+                } finally {
+                    stream.close()
+                }
+
+                def errorStream = new FileOutputStream(errorVersionFile)
+                try {
+                    errorVersion.store(errorStream, null);
+                } finally {
+                    errorStream.close()
+                }
+
+                println "Version Code is now... " + build
+            } else {
+                throw new GradleException("Could not read version.properties!")
+            }
+    }
+
+    ext.incrementVersionName = {
+        String buildType = "buildVariant", String versionType = "Version i.e(Major,Minor,Patch,Build)" ->
+
+            println "-----------------------------------------------------------------------------"
+            println "              Executing VersionName increment                                "
+            println "-----------------------------------------------------------------------------"
+
+            def versionPropsFile
+            def errorVersionFile
+            if (buildType == productionFlavor) {
+                versionPropsFile = file(project.ext.productionVersionFilePath)
+                errorVersionFile = file(project.ext.productionErrorVersionFilePath)
+            } else if (buildType == qaFlavor) {
+                versionPropsFile = file(project.ext.qaVersionFilePath)
+                errorVersionFile = file(project.ext.qaErrorVersionFilePath)
+            } else if (buildType == developmentFlavor) {
+                versionPropsFile = file(project.ext.developmentVersionFilePath)
+                errorVersionFile = file(project.ext.developmentErrorVersionFilePath)
+            } else
+                throw new GradleException("Unknown app variant type")
+
+            if (versionPropsFile.canRead()) {
+                def version = project.ext.readVersionFile(buildType)
+                def errorVersion = project.ext.readErrorVersionFile(buildType)
+                def currentMajorVersion = version['VERSION_MAJOR'] as int
+                def currentMinorVersion = version['VERSION_MINOR'] as int
+                def currentPatchVersion = version['VERSION_PATCH'] as int
+                def currentBuildNumber = version['VERSION_BUILD'] as int
+
+                currentBuildNumber = System.getenv("BUILD_NUMBER") as Integer ?: currentBuildNumber + 1
+
+                if (errorVersionFile.canRead()) {
+                    errorVersion['VERSION_MAJOR'] = currentMajorVersion.toString()
+                    errorVersion['VERSION_MINOR'] = currentMinorVersion.toString()
+                    errorVersion['VERSION_PATCH'] = currentPatchVersion.toString()
+                    errorVersion['VERSION_BUILD'] = currentBuildNumber.toString()
+                }
+
+                if (versionType == 'Major') {
+                    currentMajorVersion++
+                    currentMinorVersion = 0
+                    currentPatchVersion = 0
+                } else if (versionType == 'Minor') {
+                    currentMinorVersion++
+                    currentPatchVersion = 0
+                } else if (versionType == 'Patch') {
+                    currentPatchVersion++
+                } else if (versionType == 'Build') {
+                    //Do nothing as we need to increment build number locally or read from jenkins
+                } else {
+                    throw new GradleException("version Type not recognized, Please write (Major,Minor,Patch,Build)")
+                }
+
+                version['VERSION_MAJOR'] = currentMajorVersion.toString()
+                version['VERSION_MINOR'] = currentMinorVersion.toString()
+                version['VERSION_PATCH'] = currentPatchVersion.toString()
+                version['VERSION_BUILD'] = currentBuildNumber.toString()
+
+                def stream = new FileOutputStream(versionPropsFile)
+                try {
+                    version.store(stream, null);
+                } finally {
+                    stream.close()
+                }
+                def errorStream = new FileOutputStream(errorVersionFile)
+                try {
+                    errorVersion.store(errorStream, null);
+                } finally {
+                    errorStream.close()
+                }
+
+                println "Version is now... " + currentMajorVersion + "." + currentMinorVersion + "." + currentPatchVersion + "(" + currentBuildNumber + ")"
+
+                return currentMajorVersion + "." + currentMinorVersion + "." + currentPatchVersion + "(" + currentBuildNumber + ")"
+            }
+    }
+
+    ext.readVersionFile = {
+        String buildType = "buildVariant" ->
+            def versionPropsFile
+            if (buildType == productionFlavor)
+                versionPropsFile = file(project.ext.productionVersionFilePath)
+            else if (buildType == qaFlavor)
+                versionPropsFile = file(project.ext.qaVersionFilePath)
+            else if (buildType == developmentFlavor)
+                versionPropsFile = file(project.ext.developmentVersionFilePath)
+            else
+                throw new GradleException("Unknown app variant type")
+
+            if (versionPropsFile.canRead()) {
+                def Properties versionProps = new Properties()
+                versionProps.load(new FileInputStream(versionPropsFile))
+                return versionProps;
+            } else {
+                throw new GradleException("Could not read version.properties!")
+            }
+    }
+
+    ext.revertVersionCodeAndName = {
+        String buildVariantType = "buildVariant" ->
+            println "-----------------------------------------------------------------------------"
+            println "              Reverting VersionCode And Version Name                         "
+            println "-----------------------------------------------------------------------------"
+
+            def versionPropsFile
+            //def errorVersionFile;
+            if (buildVariantType == productionFlavor) {
+                versionPropsFile = file(project.ext.productionVersionFilePath)
+                //errorVersionFile = file(project.ext.productionErrorVersionFilePath)
+            } else if (buildVariantType == qaFlavor) {
+                versionPropsFile = file(project.ext.qaVersionFilePath)
+                //errorVersionFile = file(project.ext.qaErrorVersionFilePath)
+            } else if (buildVariantType == developmentFlavor) {
+                versionPropsFile = file(project.ext.developmentVersionFilePath)
+                //errorVersionFile = file(project.ext.developmentErrorVersionFilePath)
+            } else
+                throw new GradleException("Unknown app variant type")
+
+            if (versionPropsFile.canRead()) {
+                def version = project.ext.readVersionFile(buildVariantType)
+                def errorVersion = project.ext.readErrorVersionFile(buildVariantType)
+
+                def currentBuildCode = version['VERSION_CODE'] as int
+                def currentMajorVersion = version['VERSION_MAJOR'] as int
+                def currentMinorVersion = version['VERSION_MINOR'] as int
+                def currentPatchVersion = version['VERSION_PATCH'] as int
+                def currentBuildNumber = version['VERSION_BUILD'] as int
+
+                println "Current Version Code is: " + currentBuildCode
+                println "Current Version is now... " + currentMajorVersion + "." + currentMinorVersion + "." + currentPatchVersion + "(" + currentBuildNumber + ")"
+                println "-----------------------------------------------------------------------------"
+
+                //Get All values from Property
+                def oldBuildNumber = errorVersion['VERSION_CODE'] as int
+                def oldMajorVersion = errorVersion['VERSION_MAJOR'] as int
+                def oldMinorVersion = errorVersion['VERSION_MINOR'] as int
+                def oldPatchVersion = errorVersion['VERSION_PATCH'] as int
+                def currentErrorBuildNumber = errorVersion['VERSION_BUILD'] as int
+
+                //Set All values back to Property File
+                version['VERSION_CODE'] = oldBuildNumber.toString()
+                version['VERSION_MAJOR'] = oldMajorVersion.toString()
+                version['VERSION_MINOR'] = oldMinorVersion.toString()
+                version['VERSION_PATCH'] = oldPatchVersion.toString()
+                version['VERSION_BUILD'] = currentBuildNumber.toString()
+
+                println "Reverted Version Code is: " + oldBuildNumber
+                println "Reverted Version is now... " + oldMajorVersion + "." + oldMinorVersion + "." + oldPatchVersion + "(" + currentErrorBuildNumber + ")"
+                println "-----------------------------------------------------------------------------"
+
+                def stream = new FileOutputStream(versionPropsFile)
+                try {
+                    version.store(stream, null)
+                } finally {
+                    stream.close()
+                }
+            } else {
+                throw new GradleException("Could not read version.properties!")
+            }
+    }
+
+    ext.readErrorVersionFile = {
+        String buildType = "buildVariant" ->
+            def versionPropsFile
+            if (buildType == productionFlavor)
+                versionPropsFile = file(project.ext.productionErrorVersionFilePath)
+            else if (buildType == qaFlavor)
+                versionPropsFile = file(project.ext.qaErrorVersionFilePath)
+            else if (buildType == developmentFlavor)
+                versionPropsFile = file(project.ext.developmentErrorVersionFilePath)
+            else
+                throw new GradleException("Unknown app variant type")
+            if (versionPropsFile.canRead()) {
+                def Properties versionProps = new Properties()
+                versionProps.load(new FileInputStream(versionPropsFile))
+                return versionProps
+            } else {
+                throw new GradleException("Could not read error version.properties!")
+            }
+    }
+
+    ext.writeToJenkinFile = {
+        String messageToWrite = "version number to be written" ->
+            def versionPropsFile = file('jenkinversion.txt')
+            if (versionPropsFile.canRead()) {
+                versionPropsFile.write(messageToWrite)
+                println "Version number which is written in Jenkins file is: " + messageToWrite
+            } else {
+                println "File does not exist"
+                //throw new GradleException("Could not read version.properties!")
+            }
+    }
+}
+ext.addProjectSetting = this.&addProjectSetting
+

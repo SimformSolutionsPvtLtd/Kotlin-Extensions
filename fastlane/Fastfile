@@ -1,0 +1,208 @@
+# Customize this file, documentation can be found here:
+# https://docs.fastlane.tools/actions/
+# All available actions: https://docs.fastlane.tools/actions
+# can also be listed using the `fastlane actions` command
+
+# Change the syntax highlighting to Ruby
+# All lines starting with a # are ignored when running `fastlane`
+
+# If you want to automatically update fastlane if a new version is available:
+# update_fastlane
+
+# This is the minimum version number required.
+# Update this, if you use features of a newer version
+fastlane_version "2.64.1"
+#fastlane_version "2.18.3"
+
+default_platform :android
+
+platform :android do
+    # Fabric detail for Simform Solutions organization
+      FABRIC_API_TOKEN = "96c68e9c0138cb4916e862697ecd5746657596e6"
+      FABRIC_BUILD_SECRET = "26c18e9bb11b79d4fbf2b036d87c05bdbfef408cb7e58a4f496f2fa1451a1d1f"
+
+      TESTER_EMAIL = ['krunal.k@simformsolutions.com', 'rcbrcb13@gmail.com', 'terrydan710@gmail.com', 'akshay.r@simformsolutions.com', 'gulshan@simformsolutions.com', 'jekil.p@simformsolutions.com', 'paresh@simformsolutions.com', 'sagar.v@simformsolutions.com', 'sneh.p@simformsolutions.com']
+      CLIENT_EMAIL = ['krunal.k@simformsolutions.com', 'rcbrcb13@gmail.com', 'terrydan710@gmail.com', 'akshay.r@simformsolutions.com', 'gulshan@simformsolutions.com', 'jekil.p@simformsolutions.com', 'paresh@simformsolutions.com', 'sagar.v@simformsolutions.com', 'sneh.p@simformsolutions.com', 'pmiller@beardedloverfest.com', 'Rashidagovan@gmail.com']
+
+    #----------------------------------------------------------------------------------------------------------------------------------
+        desc "Release for development"
+        lane :devVariant do |options|
+            version=""
+            if (options[:versionChange] == 'Major' || options[:versionChange] == 'major')
+                version = "Major"
+            elsif (options[:versionChange] == 'Minor' || options[:versionChange] == 'minor')
+                version = "Minor"
+            elsif (options[:versionChange] == 'Patch' || options[:versionChange] == 'patch')
+                version = "Patch"
+            else
+                version = "Build"
+            end
+
+            task_properties={
+                      "buildVariantType" => "development",
+                      "versionType" => version
+                    }
+            gradle(task: "clean")
+            gradle(task: "performVersionCodeAndVersionNumberIncrement",properties: task_properties)
+            gradle(task: "assembleDevelopmentRelease")
+
+            if(options[:isNote])
+                tag_name_1 = get_second_last_tag
+                tag_name_2 = get_last_tag
+                if tag_name_1 != tag_name_2
+                    add_gits_tag(tag: tag_name_2)
+                    note = get_release_notes(tag_old: tag_name_1, tag_new: tag_name_2)
+                else
+                    note = last_commit_message
+                end
+                crashlytics(
+                    emails: TESTER_EMAIL,
+                    api_token: FABRIC_API_TOKEN,
+                    build_secret: FABRIC_BUILD_SECRET,
+                    notifications: true,
+                    notes: note
+                )
+            else
+                crashlytics(
+                    emails: TESTER_EMAIL,
+                    api_token: FABRIC_API_TOKEN,
+                    build_secret: FABRIC_BUILD_SECRET,
+                    notifications: true
+                )
+            end
+            #apk_path: "app/build/outputs/apk/development/release/app-development-release.apk",
+        end
+
+    #----------------------------------------------------------------------------------------------------------------------------------
+        desc "Release for qa"
+        lane :qaVariant do |options|
+            version=""
+            if (options[:versionChange] == 'Major' || options[:versionChange] == 'major')
+                version = "Major"
+            elsif (options[:versionChange] == 'Minor' || options[:versionChange] == 'minor')
+                version = "Minor"
+            elsif (options[:versionChange] == 'Patch' || options[:versionChange] == 'patch')
+                version = "Patch"
+            else
+                version = "Build"
+            end
+
+            task_properties={
+                      "buildVariantType" => "qa",
+                      "versionType" => version
+                    }
+            gradle(task: "clean")
+            gradle(task: "performVersionCodeAndVersionNumberIncrement",properties: task_properties)
+            gradle(task: "assembleQaRelease")
+
+            if(options[:isNote])
+                tag_name_1 = get_second_last_tag
+                tag_name_2 = get_last_tag
+                if tag_name_1 != tag_name_2
+                    add_gits_tag(tag: tag_name_2)
+                    note = get_release_notes(tag_old: tag_name_1, tag_new: tag_name_2)
+                else
+                    note = last_commit_message
+                end
+                crashlytics(
+                    emails: TESTER_EMAIL,
+                    api_token: FABRIC_API_TOKEN,
+                    build_secret: FABRIC_BUILD_SECRET,
+                    notifications: true,
+                    notes: note
+                )
+            else
+                crashlytics(
+                    emails: TESTER_EMAIL,
+                    api_token: FABRIC_API_TOKEN,
+                    build_secret: FABRIC_BUILD_SECRET,
+                    notifications: true
+                )
+            end
+            #apk_path: "app/build/outputs/apk/qa/release/app-qa-release.apk",
+        end
+    #----------------------------------------------------------------------------------------------------------------------------------
+        desc "Release for production"
+        lane :productionVariant do |options|
+            version=""
+            if (options[:versionChange] == 'Major' || options[:versionChange] == 'major')
+                version = "Major"
+            elsif (options[:versionChange] == 'Minor' || options[:versionChange] == 'minor')
+                version = "Minor"
+            elsif (options[:versionChange] == 'Patch' || options[:versionChange] == 'patch')
+                version = "Patch"
+            else
+                version = "Build"
+            end
+
+            task_properties={
+                      "buildVariantType" => "production",
+                      "versionType" => version
+                    }
+            gradle(task: "clean")
+            gradle(task: "performVersionCodeAndVersionNumberIncrement",properties: task_properties)
+            gradle(task: "assembleProductionRelease")
+
+            crashlytics(
+                emails: CLIENT_EMAIL,
+                api_token: FABRIC_API_TOKEN,
+                build_secret: FABRIC_BUILD_SECRET,
+                notifications: true
+            )
+            supply
+            #apk_path: "app/build/outputs/apk/production/release/app-production-release.apk",
+        end
+    #----------------------------------------------------------------------------------------------------------------------------------
+        # desc general function
+        def get_second_last_tag
+            return last_git_tag
+        end
+
+        def get_last_tag
+            commit = last_git_commit
+            short_hash = commit[:abbreviated_commit_hash]
+            return short_hash
+        end
+
+        def last_commit_message
+            commit = last_git_commit
+            message = commit[:message]
+            return message
+        end
+
+        def last_commit_data
+            commit = last_git_commit
+            message = commit[:message]
+            author = commit[:author] # author of the commit
+            hash = commit[:commit_hash] # long sha of commit
+            short_hash = commit[:abbreviated_commit_hash] # short sha of commit
+
+            return message + ", " + author + ", " + hash + ", " + short_hash
+        end
+
+        private_lane :add_gits_tag do |options|
+          `git tag -am #{options[:message].shellescape} #{options[:tag].shellescape}`
+          push_git_tags
+        end
+
+        private_lane :get_release_notes do |options|
+            msg = changelog_from_git_commits(
+                  between: [options[:tag_old], options[:tag_new]],
+                  merge_commit_filtering: 'exclude_merges'
+                )
+            return msg
+        end
+    #----------------------------------------------------------------------------------------------------------------------------------
+        # Note : Run this file by calling below command
+        # versionChange : major, minor, patch, build
+        # fastlane devVariant versionChange:"patch" isNote:false
+        # fastlane qaVariant versionChange:"patch" isNote:false
+        # fastlane productionVariant versionChange:"build"
+    #----------------------------------------------------------------------------------------------------------------------------------
+end
+
+# More information about multiple platforms in fastlane: https://github.com/fastlane/fastlane/blob/master/fastlane/docs/Platforms.md
+# All available actions: https://docs.fastlane.tools/actions
+
+# fastlane reports which actions are used. No personal data is recorded.
+# Learn more at https://docs.fastlane.tools/#metrics

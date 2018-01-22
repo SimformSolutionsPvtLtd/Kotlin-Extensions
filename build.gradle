@@ -1,0 +1,26 @@
+buildscript {
+    apply from: './settings/versions.gradle'
+    addRepos(repositories)
+
+    dependencies {
+        classpath deps.android_gradle_plugin
+        classpath deps.kotlin.plugin
+    }
+    repositories {
+        mavenCentral()
+    }
+}
+
+plugins {
+    id "com.diffplug.gradle.spotless" version "3.6.0"
+}
+
+allprojects {
+    addRepos(repositories)
+    addProjectSetting()
+}
+
+task clean(type: Delete) {
+    delete rootProject.buildDir
+}
+

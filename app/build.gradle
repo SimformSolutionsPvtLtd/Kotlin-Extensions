@@ -1,0 +1,235 @@
+apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android' // Enables android kotlin support
+apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-kapt' // Enables anotation processor support
+apply plugin: 'com.diffplug.gradle.spotless'
+
+spotless {
+    kotlin {
+        target "**/*.kt"
+        ktlint()
+        licenseHeaderFile '../spotless/copyright.kt'
+    }
+}
+
+kapt {
+    generateStubs = true
+}
+
+android {
+    compileSdkVersion build_versions.target_sdk
+    buildToolsVersion build_versions.build_tools
+
+    defaultConfig {
+        applicationId "com.kotlinextension"
+        minSdkVersion build_versions.min_sdk
+        targetSdkVersion build_versions.target_sdk
+    }
+
+    sourceSets {
+        main {
+            manifest.srcFile 'src/main/AndroidManifest.xml'
+            java.srcDirs = ['src/main/kotlin', 'src/main/java']
+            assets.srcDirs = ['src/main/assets']
+            res.srcDirs =
+                    [
+                            'src/main/res/layouts/activities',
+                            'src/main/res/layouts/fragments',
+                            'src/main/res/layouts/dialogs',
+                            'src/main/res/layouts/items',
+                            'src/main/res/layouts/views',
+                            'src/main/res'
+                    ]
+        }
+    }
+
+    androidExtensions {
+        experimental = true
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+    packagingOptions {
+        exclude 'META-INF/rxjava.properties'
+        exclude 'META-INF/DEPENDENCIES.txt'
+        exclude 'META-INF/LICENSE.txt'
+        exclude 'META-INF/NOTICE.txt'
+        exclude 'META-INF/NOTICE'
+        exclude 'META-INF/LICENSE'
+        exclude 'META-INF/DEPENDENCIES'
+        exclude 'META-INF/notice.txt'
+        exclude 'META-INF/license.txt'
+        exclude 'META-INF/dependencies.txt'
+        exclude 'META-INF/LGPL2.1'
+        exclude 'LICENSE.txt'
+        exclude 'LICENSE'
+    }
+
+    signingConfigs {
+        debug {
+            keyAlias signing_configs.debug_alias
+            keyPassword signing_configs.debug_password
+            storePassword signing_configs.debug_password
+            storeFile file(signing_configs.debug_file)
+        }
+        release {
+            keyAlias signing_configs.live_alias
+            keyPassword signing_configs.live_password
+            storePassword signing_configs.live_password
+            storeFile file(signing_configs.live_file)
+        }
+    }
+
+    flavorDimensions "mode"
+    productFlavors {
+        production {
+            dimension "mode"
+            applicationId "com.kotlinextension"
+            versionCode readVersionCode("production")
+            versionName readVersionName("production")
+
+            it.buildConfigField 'Boolean', "IS_ENABLED", 'false'
+        }
+        qa {
+            dimension "mode"
+            applicationId "com.kotlinextension"
+            versionCode readVersionCode("qa")
+            versionName readVersionName("qa")
+
+            it.buildConfigField 'Boolean', "IS_ENABLED", 'true'
+        }
+        development {
+            dimension "mode"
+            applicationId "com.kotlinextension"
+            versionCode readVersionCode("development")
+            versionName readVersionName("development")
+
+            it.buildConfigField 'Boolean', "IS_ENABLED", 'true'
+        }
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguard_list.each { pro_guard ->
+                proguardFile pro_guard
+            }
+            signingConfig signingConfigs.release
+            //it.buildConfigField "String", 'BASEURL_API', "\"http://simform.solutions/bearded-lovers-app-backend/public/api/v2/\""
+        }
+
+        debug {
+            minifyEnabled false
+            proguard_list.each { pro_guard ->
+                proguardFile pro_guard
+            }
+            signingConfig signingConfigs.debug
+            //it.buildConfigField "String", 'BASEURL_API', "\"http://simform.solutions/bearded-lovers-app-backend/public/api/v2/\""
+        }
+    }
+
+    android.applicationVariants.all { variant ->
+        variant.outputs.all { output ->
+            def outputFile = output.outputFile
+            if (outputFile != null) {
+                def appName
+                if (project.hasProperty("applicationName")) {
+                    appName = applicationName
+                } else {
+                    appName = parent.name
+                }
+
+                if (outputFile.name.endsWith('-release.apk')) {
+                    def fileName
+                    if (variant.productFlavors[0].name == "production") {
+                        fileName = outputFile.name.replace("app-production-release", "${appName}_prod_${readVersionNameForApk("production")}")
+                    } else if (variant.productFlavors[0].name == "development") {
+                        fileName = outputFile.name.replace("app-development-release", "${appName}_dev_${readVersionNameForApk("development")}")
+                    } else if (variant.productFlavors[0].name == "qa") {
+                        fileName = outputFile.name.replace("app-qa-release", "${appName}_qa_${readVersionNameForApk("qa")}")
+                    }
+                    outputFileName = fileName
+
+                    def destination = "${project.rootDir}/settings/apk/${variant.productFlavors[0].name}"
+                    def taskSuffix = variant.name.capitalize()
+                    def assembleTaskName = "assemble${taskSuffix}"
+                    def copyAPKTask = tasks.create(name: "archive${taskSuffix}", type: Copy) {
+                        from("${project.buildDir}/outputs/apk/${variant.productFlavors[0].name}/release/${outputFileName}")
+                        into(destination)
+                    }
+                    tasks[assembleTaskName].finalizedBy = [copyAPKTask]
+                }
+            }
+        }
+    }
+
+    configurations.all {
+        resolutionStrategy.eachDependency { DependencyResolveDetails details ->
+            def requested = details.requested
+            if (requested.group == 'com.android.support') {
+                if (!requested.name.startsWith("multidex")) {
+                    details.useVersion '27.0.2'
+                }
+            }
+        }
+    }
+}
+
+dependencies {
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
+    // Support libraries
+    implementation deps.support.app_compat
+    implementation deps.support.constraint_layout
+
+    implementation project(':kotlinextensions')
+}
+
+def readVersionNameForApk(def buildType = "buildVariant") {
+    def version = readVersionFile(buildType)
+    return "V${version['VERSION_MAJOR']}.${version['VERSION_MINOR']}.${version['VERSION_PATCH']}(${version['VERSION_BUILD']})_${new Date().format("yyyyMMdd_HHmmss", TimeZone.getTimeZone("UTC"))}"
+}
+
+def readVersionName(def buildType = "buildVariant") {
+    def version = readVersionFile(buildType)
+    return "${version['VERSION_MAJOR']}.${version['VERSION_MINOR']}.${version['VERSION_PATCH']}(${version['VERSION_BUILD']})"
+}
+
+def readVersionCode(def buildType = "buildVariant") {
+    def version = readVersionFile(buildType)
+    def build = version['VERSION_CODE'] as int
+    return build
+}
+
+project.afterEvaluate {
+    task performVersionCodeAndVersionNumberIncrement {
+        description 'Task for incrementing versionCode & versionNumber According to Build Variant and version type'
+        doLast {
+            println "-----------------------------------------------------------------------------"
+            println "              Executing VersionCode & versionName method                    "
+            println "-----------------------------------------------------------------------------"
+            println "Incrementing " + versionType + " version for " + buildVariantType + " release"
+            incrementVersionCode(buildVariantType)
+            def latestVersionName = incrementVersionName(buildVariantType, versionType)
+            println "-----------------------------------------------------------------------------"
+            println "              Writing Latest Version name to Jenkins file"
+            println "-----------------------------------------------------------------------------"
+            writeToJenkinFile(latestVersionName)
+            println "-----------------------------------------------------------------------------"
+            println "              Compiling Build according to " + buildVariantType
+            println "-----------------------------------------------------------------------------"
+        }
+    }
+
+    task revertVersionCodeForVariant {
+        description 'Task for incrementing versionCode & versionNumber According to Build Variant and version type'
+        doLast {
+            println "-----------------------------------------------------------------------------"
+            println "              Reverting Version Code For " + buildVariantType
+            println "-----------------------------------------------------------------------------"
+            revertVersionCodeAndName(buildVariantType)
+        }
+    }
+}
