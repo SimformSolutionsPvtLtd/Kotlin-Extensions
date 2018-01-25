@@ -47,6 +47,7 @@ fun downloadFile(urlPath :String, localPath :String, callback : F1<Uri>?) :Uri? 
 }
 
 fun String.toFile() = File(this)
+
 @Suppress("unused")
 fun saveFile(fullPath :String, content :String) :File =
     fullPath.toFile().apply {
@@ -191,11 +192,7 @@ private fun Context.getDataColumns(uri :Uri?, selection :String?, selectionArgs 
     return null
 }
 
-private fun isExternalStorageDocument(uri :Uri) :Boolean =
-    "com.android.externalstorage.documents" == uri.authority
-
-private fun isDownloadsDocument(uri :Uri) :Boolean =
-    "com.android.providers.downloads.documents" == uri.authority
-
+private fun isExternalStorageDocument(uri :Uri) :Boolean = "com.android.externalstorage.documents" == uri.authority
+private fun isDownloadsDocument(uri :Uri) :Boolean = "com.android.providers.downloads.documents" == uri.authority
 private fun isMediaDocument(uri :Uri) :Boolean = "com.android.providers.media.documents" == uri.authority
 private fun isGooglePhotosUri(uri :Uri) :Boolean = "com.google.android.apps.photos.content" == uri.authority
