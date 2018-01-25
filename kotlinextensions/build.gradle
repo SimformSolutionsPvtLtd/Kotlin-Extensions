@@ -90,19 +90,26 @@ android {
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-    // Dependency Injection
-    implementation deps.dagger.runtime
-    kapt deps.dagger.compiler
 
     // Support libraries
     implementation deps.support.design
     implementation deps.support.v4
+    implementation deps.support.card_view
 
     // Kotlin
     implementation deps.kotlin.stdlib
 
+    // Picasso
+    implementation deps.picasso
+    implementation deps.picasso_okhttp3_downloader
+
     // Data Binding
     kapt deps.binding_compiler
+
+    // Architecture components
+    implementation deps.lifecycle.runtime
+    implementation deps.lifecycle.extensions
+    kapt deps.lifecycle.compiler
 
     // RxJava
     implementation deps.rx_java2
