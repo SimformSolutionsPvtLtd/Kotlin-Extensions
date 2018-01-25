@@ -20,7 +20,7 @@ import com.extensions.addToBackStrack
 import com.extensions.app.*
 import com.extensions.content.*
 import com.extensions.view.findView
-import com.simform.enums.TransactionType
+import com.extensions.TransactionType
 
 inline fun <V : View> Fragment.findView(
     @IdRes id: Int,
@@ -113,7 +113,7 @@ fun Fragment.replaceChildFragment(@IdRes frameId : Int, currentFragment: Fragmen
     (context as AppCompatActivity).replaceChildFragment(frameId, currentFragment, fragment, isAddToBackStack)
 }
 
-fun Fragment.loadFragment(@IdRes frameId : Int, fragment: Fragment, fragmentToTarget: Fragment?, transactionType: TransactionType, addToBackStack: Boolean, requestcode: Int) {
+fun Fragment.loadFragment(@IdRes frameId : Int, fragment: Fragment, fragmentToTarget: Fragment?, transactionType:TransactionType, addToBackStack: Boolean, requestcode: Int) {
     (context as AppCompatActivity).loadFragment(frameId, fragment, fragmentToTarget, transactionType, addToBackStack, requestcode)
 }
 

@@ -16,7 +16,7 @@ import android.widget.EditText
 import com.extensions.addToBackStrack
 import com.extensions.content.*
 import com.extensions.view.findView
-import com.simform.enums.TransactionType
+import com.extensions.TransactionType
 
 inline fun <V : View> Fragment.findView(
     @IdRes id: Int,
@@ -112,7 +112,7 @@ fun Fragment.replaceChildFragment(@IdRes frameId : Int, currentFragment: Fragmen
     (activity as Activity).replaceChildFragment(frameId, currentFragment, fragment, isAddToBackStack)
 }
 
-fun Fragment.loadFragment(@IdRes frameId : Int, fragment: Fragment, fragmentToTarget: Fragment?, transactionType: TransactionType, addToBackStack: Boolean, requestcode: Int) {
+fun Fragment.loadFragment(@IdRes frameId : Int, fragment: Fragment, fragmentToTarget: Fragment?, transactionType:TransactionType, addToBackStack: Boolean, requestcode: Int) {
     (activity as Activity).loadFragment(frameId, fragment, fragmentToTarget, transactionType, addToBackStack, requestcode)
 }
 

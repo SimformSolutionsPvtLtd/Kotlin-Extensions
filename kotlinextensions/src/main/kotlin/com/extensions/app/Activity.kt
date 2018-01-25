@@ -22,7 +22,7 @@ import com.extensions.content.intentFor
 import com.extensions.content.isPermissionsGranted
 import com.extensions.content.showLongToast
 import com.extensions.content.showShortToast
-import com.simform.enums.TransactionType
+import com.extensions.TransactionType
 
 /**
  * Shortcut for retrieving root view of Activity
@@ -197,7 +197,7 @@ fun Activity.replaceChildFragment(@IdRes frameId : Int, currentFragment: Fragmen
 }
 
 @SuppressLint("ResourceType")
-fun Activity.loadFragment(@IdRes frameId : Int, fragment: Fragment, fragmentToTarget: Fragment?, transactionType: TransactionType, addToBackStack: Boolean, requestcode: Int) {
+fun Activity.loadFragment(@IdRes frameId : Int, fragment: Fragment, fragmentToTarget: Fragment?, transactionType:TransactionType, addToBackStack: Boolean, requestcode: Int) {
     val fragmentTransaction = fragmentManager.beginTransaction()
     if (addToBackStack)
         fragmentTransaction.addToBackStack(null)

@@ -9,10 +9,10 @@ import java.util.Collections.unmodifiableList
 import java.util.regex.Pattern
 
 @Suppress("unused")
-object Timber {
+object Logger {
 
     /**
-     * A facade for handling logging calls. Install instances via [Timber.plant()][.plant].
+     * A facade for handling logging calls. Install instances via [Logger.plant()][.plant].
      */
     abstract class Tree {
         internal val explicitTag = ThreadLocal<String>()
@@ -721,7 +721,7 @@ object Timber {
     }
 
     /**
-     * A view into Timber's planted trees as a tree itself. This can be used for injecting a logger
+     * A view into Logger's planted trees as a tree itself. This can be used for injecting a logger
      * instance rather than using static methods or to facilitate testing.
      */
     fun asTree() = TREE_OF_SOULS
@@ -746,7 +746,7 @@ object Timber {
      */
     fun plant(tree: Tree) {
         if (tree === TREE_OF_SOULS) {
-            throw IllegalArgumentException("Cannot plant Timber into itself.")
+            throw IllegalArgumentException("Cannot plant Logger into itself.")
         }
         synchronized(FOREST) {
             FOREST.add(tree)
@@ -761,7 +761,7 @@ object Timber {
 
         trees
                 .filter { it === TREE_OF_SOULS }
-                .forEach { throw IllegalArgumentException("Cannot plant Timber into itself.") }
+                .forEach { throw IllegalArgumentException("Cannot plant Logger into itself.") }
         synchronized(FOREST) {
             Collections.addAll(FOREST, *trees)
             forestAsArray = FOREST.toTypedArray()
@@ -809,16 +809,16 @@ object Timber {
 }
 
 @Suppress("unused")
-fun Any?.d() = Timber.TREE_OF_SOULS.d(this ?: "null")
+fun Any?.d() = Logger.TREE_OF_SOULS.d(this ?: "null")
 
 @Suppress("unused")
-fun Any?.e() = Timber.TREE_OF_SOULS.e(this ?: "null")
+fun Any?.e() = Logger.TREE_OF_SOULS.e(this ?: "null")
 
 @Suppress("unused")
-fun Any?.i() = Timber.TREE_OF_SOULS.i(this ?: "null")
+fun Any?.i() = Logger.TREE_OF_SOULS.i(this ?: "null")
 
 @Suppress("unused")
-fun Any?.wtf() = Timber.TREE_OF_SOULS.wtf(this ?: "null")
+fun Any?.wtf() = Logger.TREE_OF_SOULS.wtf(this ?: "null")
 
 @Suppress("unused")
-fun Any?.w() = Timber.TREE_OF_SOULS.w(this ?: "null")
+fun Any?.w() = Logger.TREE_OF_SOULS.w(this ?: "null")

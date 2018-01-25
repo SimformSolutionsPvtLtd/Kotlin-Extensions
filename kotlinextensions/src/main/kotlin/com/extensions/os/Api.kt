@@ -2,21 +2,51 @@ package com.extensions.os
 
 import android.os.Build
 
-inline fun ifApi(api: Api, block: () -> Unit) {
-    ifApi(api.sdkCode, block)
+inline fun doWithApi(api: Api, block: () -> Unit) {
+    doWithApi(api.sdkCode, block)
 }
 
-inline fun ifApi(sdkCode: Int, block: () -> Unit) {
+inline fun doWithApi(sdkCode: Int, block: () -> Unit) {
+    if (Build.VERSION.SDK_INT == sdkCode) {
+        block()
+    }
+}
+
+inline fun doWithAtLeastApi(api: Api, block: () -> Unit) {
+    doWithAtLeastApi(api.sdkCode, block)
+}
+
+inline fun doWithAtLeastApi(sdkCode: Int, block: () -> Unit) {
     if (Build.VERSION.SDK_INT >= sdkCode) {
         block()
     }
 }
 
-inline fun ifNotApi(api: Api, block: () -> Unit) {
-    ifNotApi(api.sdkCode, block)
+inline fun doWithAtMostApi(api: Api, block: () -> Unit) {
+    doWithAtMostApi(api.sdkCode, block)
 }
 
-inline fun ifNotApi(sdkCode: Int, block: () -> Unit) {
+inline fun doWithAtMostApi(sdkCode: Int, block: () -> Unit) {
+    if (Build.VERSION.SDK_INT <= sdkCode) {
+        block()
+    }
+}
+
+inline fun doWithHigherApi(api: Api, block: () -> Unit) {
+    doWithHigherApi(api.sdkCode, block)
+}
+
+inline fun doWithHigherApi(sdkCode: Int, block: () -> Unit) {
+    if (Build.VERSION.SDK_INT > sdkCode) {
+        block()
+    }
+}
+
+inline fun doWithLowerApi(api: Api, block: () -> Unit) {
+    doWithLowerApi(api.sdkCode, block)
+}
+
+inline fun doWithLowerApi(sdkCode: Int, block: () -> Unit) {
     if (Build.VERSION.SDK_INT < sdkCode) {
         block()
     }

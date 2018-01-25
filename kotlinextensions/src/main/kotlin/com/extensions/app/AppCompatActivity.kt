@@ -1,6 +1,5 @@
 package com.extensions.app
 
-import android.app.Activity
 import android.os.Build
 import android.support.annotation.IdRes
 import android.support.annotation.RequiresApi
@@ -14,7 +13,7 @@ import com.extensions.content.Permission
 import com.extensions.content.isPermissionsGranted
 import com.extensions.content.showLongToast
 import com.extensions.content.showShortToast
-import com.simform.enums.TransactionType
+import com.extensions.TransactionType
 
 fun AppCompatActivity.showToolbar() {
     supportActionBar?.show()
@@ -65,7 +64,7 @@ fun AppCompatActivity.replaceChildFragment(@IdRes frameId : Int, currentFragment
     fragmentTransaction.commit()
 }
 
-fun AppCompatActivity.loadFragment(@IdRes frameId : Int, fragment: Fragment, fragmentToTarget: Fragment?, transactionType: TransactionType, addToBackStack: Boolean, requestcode: Int) {
+fun AppCompatActivity.loadFragment(@IdRes frameId : Int, fragment: Fragment, fragmentToTarget: Fragment?, transactionType:TransactionType, addToBackStack: Boolean, requestcode: Int) {
     val fragmentManager = supportFragmentManager
 
     val fragmentTransaction = fragmentManager.beginTransaction()
