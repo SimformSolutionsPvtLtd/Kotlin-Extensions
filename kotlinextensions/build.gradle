@@ -22,6 +22,13 @@ android {
         main {
             manifest.srcFile 'src/main/AndroidManifest.xml'
             java.srcDirs = ['src/main/kotlin', 'src/main/java']
+            assets.srcDirs = ['src/main/assets']
+            /*res.srcDirs =
+                    [
+                        'src/main/res/layouts/items',
+                        'src/main/res/layouts/views',
+                        'src/main/res'
+                    ]*/
         }
     }
 
