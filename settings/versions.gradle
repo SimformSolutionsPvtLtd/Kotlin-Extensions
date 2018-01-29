@@ -126,13 +126,13 @@ kotlin.plugin = "org.jetbrains.kotlin:kotlin-gradle-plugin:$versions.kotlin"
 deps.kotlin = kotlin
 
 def googleGms = [:]
-google.services = "com.google.gms:google-services:$versions.googlePlayService"
-google.auth = "com.google.android.gms:play-services-auth:$versions.playServices"
-google.ads = "com.google.android.gms:play-services-ads:$versions.playServices"
-google.location = "com.google.android.gms:play-services-location:$versions.playServices"
-google.analytics = "com.google.android.gms:play-services-analytics:$versions.playServices"
-google.gcm = "com.google.android.gms:play-services-gcm:$versions.playServices"
-deps.google = google
+googleGms.services = "com.google.gms:google-services:$versions.googlePlayService"
+googleGms.auth = "com.google.android.gms:play-services-auth:$versions.playServices"
+googleGms.ads = "com.google.android.gms:play-services-ads:$versions.playServices"
+googleGms.location = "com.google.android.gms:play-services-location:$versions.playServices"
+googleGms.analytics = "com.google.android.gms:play-services-analytics:$versions.playServices"
+googleGms.gcm = "com.google.android.gms:play-services-gcm:$versions.playServices"
+deps.googleGms = googleGms
 
 def firebase = [:]
 firebase.auth = "com.google.firebase:firebase-auth:$versions.firebase_auth"

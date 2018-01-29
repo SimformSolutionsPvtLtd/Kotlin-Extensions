@@ -106,10 +106,6 @@ dependencies {
     // Kotlin
     implementation deps.kotlin.stdlib
 
-    // Picasso
-    implementation deps.picasso.runtime
-    implementation deps.picasso.downloader
-
     // Data Binding
     kapt deps.binding_compiler
 
