@@ -4,7 +4,7 @@ import android.os.Bundle
 import android.os.Parcelable
 import kotlin.reflect.KClass
 
-@Suppress("unused")
+
 class Bundlify {
    var bundle = Bundle()
     

@@ -2,7 +2,7 @@ package com.extensions.validation
 
 import android.databinding.BaseObservable
 
-@Suppress("unused")
+
 class ValidatedObservableField<T> : BaseObservable {
     private var rule: Rule<T>? = null
     private var value: T? = null

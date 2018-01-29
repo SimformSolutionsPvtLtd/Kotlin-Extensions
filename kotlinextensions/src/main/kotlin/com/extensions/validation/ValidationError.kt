@@ -1,6 +1,6 @@
 package com.extensions.validation
 
-@Suppress("unused")
+
 enum class ValidationError {
     MINIMUM_LENGTH,
     MAXIMUM_LENGTH,

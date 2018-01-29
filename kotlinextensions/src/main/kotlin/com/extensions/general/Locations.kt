@@ -19,14 +19,13 @@ import com.extensions.content.locationManager
 import com.extensions.content.sensorManager
 import com.extensions.content.windowManager
 import com.extensions.interfaces.F1
-import com.extensions.logging.Timber
+import com.extensions.interfaces.F2
+import com.extensions.logging.Logger
 import java.io.IOException
 import java.util.*
 
-@Suppress("unused")
 @SuppressLint("MissingPermission", "Registered")
 class Locations : Service() {
-
     private val gpsLocationListener = LocationChangeListener()
     private val networkLocationListener = LocationChangeListener()
     private val sensorEventListener = SensorListener()
@@ -104,7 +103,7 @@ class Locations : Service() {
         }
     }
 
-    fun setLocationCallback(callback: F1<Location>) {
+    fun setLocationCallback(callback:F1<Location>) {
         locationCallback = object : LocationCallback, (Location) -> Unit {
             override fun invoke(location: Location) {
                 callback.invoke(location)
@@ -127,7 +126,7 @@ class Locations : Service() {
         try {
             return geoCoder.getFromLocation(currentBestLocation?.latitude ?: 0.0, currentBestLocation?.longitude ?: 0.0, 1)
         } catch (e: IOException) {
-            Timber.e("Impossible to connect to Geocoder" + e.toString())
+            Logger.e("Impossible to connect to Geocoder" + e.toString())
         }
 
         return null
@@ -207,7 +206,7 @@ class Locations : Service() {
     private inner class SensorListener : SensorEventListener {
         override fun onAccuracyChanged(sensor: Sensor?, accuracy: Int) {
             if (sensor?.type == Sensor.TYPE_ROTATION_VECTOR) {
-                Timber.i("Rotation sensor accuracy changed to: " + accuracy)
+                Logger.i("Rotation sensor accuracy changed to: " + accuracy)
             }
         }
 

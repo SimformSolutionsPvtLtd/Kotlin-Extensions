@@ -7,7 +7,7 @@ import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
 import com.extensions.content.inputMethodManager
 
-@Suppress("unused")
+
 public fun Activity.isShowKeyboard(): Boolean {
     return inputMethodManager.isAcceptingText
 }

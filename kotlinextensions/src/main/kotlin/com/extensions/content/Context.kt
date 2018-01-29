@@ -237,19 +237,19 @@ fun Context.email(email: String, subject: String = "", text: String = ""): Boole
 
 }
 
-@Suppress("unused")
+
 fun Context.hideKeyboard(window: Window, view: View?) {
     if (view?.windowToken != null)
         inputMethodManager.hideSoftInputFromWindow(view.windowToken, 0)
     window.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN)
 }
 
-@Suppress("unused")
+
 fun Context.isShowKeyboard(): Boolean {
     return inputMethodManager.isAcceptingText
 }
 
-@Suppress("unused")
+
 fun Context.toggleKeyboard() {
     if (inputMethodManager.isActive)
         inputMethodManager.toggleSoftInput(InputMethodManager.SHOW_IMPLICIT, InputMethodManager.HIDE_NOT_ALWAYS)

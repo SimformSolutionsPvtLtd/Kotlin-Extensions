@@ -26,10 +26,10 @@ public class DefaultViewInjector implements IViewInjector<DefaultViewInjector> {
 
     @Override
     public final <T extends View> T findViewById(int id) {
-        if(viewHolder instanceof RecyclerBindingViewHolder)
-            return (T) ((RecyclerBindingViewHolder) viewHolder).id(id);
-        else
+        if(viewHolder instanceof RecyclerViewHolder)
             return (T) ((RecyclerViewHolder) viewHolder).id(id);
+        else
+            return null;
     }
 
     @Override

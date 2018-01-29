@@ -6,7 +6,7 @@ import android.content.pm.PackageManager
 import android.util.Base64
 import java.security.MessageDigest
 
-@Suppress("unused")
+
 @SuppressLint("PackageManagerGetSignatures")
 fun Context.getKeyHash(): String {
     val hashList: ArrayList<String> = ArrayList()

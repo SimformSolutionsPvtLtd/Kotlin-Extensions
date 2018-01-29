@@ -16,7 +16,6 @@ import java.net.HttpURLConnection
 import java.net.URL
 import java.nio.charset.Charset
 
-@Suppress("unused")
 fun downloadFile(urlPath :String, localPath :String, callback :(Uri?) -> Unit = {}) :Uri? {
     var uri :Uri? = null
     val connection = URL(urlPath).openConnection() as HttpURLConnection
@@ -33,7 +32,6 @@ fun downloadFile(urlPath :String, localPath :String, callback :(Uri?) -> Unit = 
     return uri
 }
 
-@Suppress("unused")
 fun downloadFile(urlPath :String, localPath :String, callback : F1<Uri>?) :Uri? {
     var uri :Uri? = null
     val connection = URL(urlPath).openConnection() as HttpURLConnection
@@ -48,13 +46,11 @@ fun downloadFile(urlPath :String, localPath :String, callback : F1<Uri>?) :Uri? 
 
 fun String.toFile() = File(this)
 
-@Suppress("unused")
 fun saveFile(fullPath :String, content :String) :File =
     fullPath.toFile().apply {
         writeText(content, Charset.defaultCharset())
     }
 
-@Suppress("unused")
 fun File.readFile() :String = this.readText(Charset.defaultCharset())
 
 private fun getDataColumn(context :Context, uri :Uri?, selection :String?, selectionArgs :Array<String>?) :String {
@@ -67,7 +63,6 @@ private fun getDataColumn(context :Context, uri :Uri?, selection :String?, selec
     return ""
 }
 
-@Suppress("unused")
 @TargetApi(Build.VERSION_CODES.KITKAT)
 infix fun Uri.getRealPath(context :Context) :String {
     val isKitKat = Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT
@@ -117,28 +112,27 @@ private fun Uri.checkAuthority(context :Context) :String {
 }
 
 //get Path
-@Suppress("unused")
 @TargetApi(Build.VERSION_CODES.KITKAT)
-fun Context.getRealPathFromURI(uri :Uri) :String? {
+infix fun Uri.getRealPathFromURI(context :Context) :String? {
     val isKitKat = Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT
 
-    if(isKitKat && DocumentsContract.isDocumentUri(this, uri)) {
-        if(isExternalStorageDocument(uri)) {
-            val docId = DocumentsContract.getDocumentId(uri)
+    if(isKitKat && DocumentsContract.isDocumentUri(context, this)) {
+        if(isExternalStorageDocument(this)) {
+            val docId = DocumentsContract.getDocumentId(this)
             val split = docId.split(":".toRegex()).dropLastWhile {it.isEmpty()}.toTypedArray()
             val type = split[0]
 
             if("primary".equals(type, ignoreCase = true)) {
                 return Environment.getExternalStorageDirectory().toString() + "/" + split[1]
             }
-        } else if(isDownloadsDocument(uri)) {
-            val id = DocumentsContract.getDocumentId(uri)
+        } else if(isDownloadsDocument(this)) {
+            val id = DocumentsContract.getDocumentId(this)
             val contentUri = ContentUris.withAppendedId(
                 Uri.parse("content://downloads/public_downloads"), java.lang.Long.valueOf(id)!!)
 
-            return getDataColumns(contentUri, null, null)
-        } else if(isMediaDocument(uri)) {
-            val docId = DocumentsContract.getDocumentId(uri)
+            return context.getDataColumns(contentUri, null, null)
+        } else if(isMediaDocument(this)) {
+            val docId = DocumentsContract.getDocumentId(this)
             val split = docId.split(":".toRegex()).dropLastWhile {it.isEmpty()}.toTypedArray()
             val type = split[0]
             var contentUri :Uri? = null
@@ -150,14 +144,14 @@ fun Context.getRealPathFromURI(uri :Uri) :String? {
             val selection = "_id=?"
             val selectionArgs = arrayOf(split[1])
 
-            return getDataColumns(contentUri, selection, selectionArgs)
+            return context.getDataColumns(contentUri, selection, selectionArgs)
         }
-    } else return if("content".equals(uri.scheme, ignoreCase = true)) {
-        if(isGooglePhotosUri(uri)) uri.lastPathSegment else getDataColumns(uri, null, null)
-    } else if("file".equals(uri.scheme, ignoreCase = true)) {
-        uri.path
+    } else return if("content".equals(scheme, ignoreCase = true)) {
+        if(isGooglePhotosUri(this)) lastPathSegment else context.getDataColumns(this, null, null)
+    } else if("file".equals(scheme, ignoreCase = true)) {
+        path
     } else
-        getRealPathFromURIDB(uri)
+        context.getRealPathFromURIDB(this)
     return null
 }
 

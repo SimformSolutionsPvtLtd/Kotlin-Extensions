@@ -8,17 +8,17 @@ fun Date.asDateString(format: String? = "yyyy-MM-dd HH:mm:ss"): String = SimpleD
 
 fun Long.asDateString(format: String? = "yyyy-MM-dd HH:mm:ss"): String = Date(this).asDateString(format)
 
-@Suppress("unused")
+
 fun Long.asDate(format: String? = "EEE, MMM dd hh a"): String = SimpleDateFormat(format, Locale.getDefault()).format(this)
 
-@Suppress("unused")
+
 fun String.parseDate(format: String? = "yyyy-MM-dd HH:mm:ss"): Date? = try {
     SimpleDateFormat(format, Locale.getDefault()).parse(this)
 } catch (e: Exception) {
     null
 }
 
-@Suppress("unused")
+
 fun String.toDateString(fromFormat: String, toFormat: String): String {
     val result: String
     val df = SimpleDateFormat(fromFormat, Locale.getDefault())
@@ -31,7 +31,7 @@ fun String.toDateString(fromFormat: String, toFormat: String): String {
     return result
 }
 
-@Suppress("unused")
+
 fun Long.toDateString(fromFormat: String, toFormat: String): String {
     val result: String
     val df = SimpleDateFormat(toFormat, Locale.getDefault())

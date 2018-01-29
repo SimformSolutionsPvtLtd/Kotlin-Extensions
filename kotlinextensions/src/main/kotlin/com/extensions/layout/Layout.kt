@@ -20,14 +20,14 @@ fun ViewGroup.inflateInto(
         attachToRoot: Boolean = false
 ): View = context.inflate(layoutReId, this, attachToRoot)
 
-@Suppress("unused")
+
 fun ViewGroup.inflateView(@LayoutRes layoutRes: Int): View =
     context.inflate(layoutRes, this, false)
 
-@Suppress("unused")
+
 fun ViewGroup.inflateBindView(@LayoutRes layoutRes: Int): ViewDataBinding =
     DataBindingUtil.inflate(context.layoutInflater, layoutRes, this, false)
 
-@Suppress("unused")
+
 fun Context.inflateBindView(@LayoutRes layoutRes: Int): ViewDataBinding =
     DataBindingUtil.inflate(layoutInflater, layoutRes, null, false)

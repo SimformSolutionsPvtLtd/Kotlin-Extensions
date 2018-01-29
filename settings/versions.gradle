@@ -5,6 +5,7 @@ versions.googlePlayService = "3.1.1"
 versions.kotlin = "1.2.20"
 
 versions.supportLibrary = "27.0.2"
+versions.playServices = "11.8.0"
 versions.constraintLayout = "1.0.2"
 versions.rxJava = "2.1.3"
 versions.rxAndroid = "2.0.1"
@@ -124,40 +125,61 @@ kotlin.test = "org.jetbrains.kotlin:kotlin-test-junit:$versions.kotlin"
 kotlin.plugin = "org.jetbrains.kotlin:kotlin-gradle-plugin:$versions.kotlin"
 deps.kotlin = kotlin
 
-def google = [:]
+def googleGms = [:]
 google.services = "com.google.gms:google-services:$versions.googlePlayService"
-google.firebase_auth = "com.google.firebase:firebase-auth:$versions.firebase_auth"
-google.firebase_database = "com.google.firebase:firebase-database:$versions.firebase_database"
-google.firebase_messaging = "com.google.firebase:firebase-messaging:$versions.firebase_messaging"
+google.auth = "com.google.android.gms:play-services-auth:$versions.playServices"
+google.ads = "com.google.android.gms:play-services-ads:$versions.playServices"
+google.location = "com.google.android.gms:play-services-location:$versions.playServices"
+google.analytics = "com.google.android.gms:play-services-analytics:$versions.playServices"
+google.gcm = "com.google.android.gms:play-services-gcm:$versions.playServices"
 deps.google = google
 
-deps.facebook = "com.facebook.android:facebook-android-sdk:$versions.facebook"
+def firebase = [:]
+firebase.auth = "com.google.firebase:firebase-auth:$versions.firebase_auth"
+firebase.database = "com.google.firebase:firebase-database:$versions.firebase_database"
+firebase.messaging = "com.google.firebase:firebase-messaging:$versions.firebase_messaging"
+deps.firebase = firebase
 
-deps.crashlytics_gradle_plugin = "io.fabric.tools:gradle:1.+"
-deps.crashlytics = 'com.crashlytics.sdk.android:crashlytics:2.7.1@aar'
+def picasso = [:]
+picasso.runtime = "com.squareup.picasso:picasso:$versions.picasso"
+picasso.downloader = "com.jakewharton.picasso:picasso2-okhttp3-downloader:$versions.okhttp3"
+deps.picasso = picasso
+
+def glide = [:]
+glide.runtime = "com.github.bumptech.glide:glide:$versions.glide"
+glide.compiler = "com.github.bumptech.glide:compiler:$versions.glide"
+glide.annotations = "com.github.bumptech.glide:annotations:$versions.glide"
+glide.downloader = "com.github.bumptech.glide:okhttp3-integration:$versions.glide"
+deps.glide = glide
+
+def okhttp = [:]
+okhttp.runtime = "com.squareup.okhttp3:okhttp:$versions.okHttp"
+okhttp.logging = "com.squareup.okhttp3:logging-interceptor:$versions.okHttp"
+deps.okhttp = okhttp
+
+def rx = [:]
+rx.android = "io.reactivex.rxjava2:rxandroid:$versions.rxAndroid"
+rx.java2 = "io.reactivex.rxjava2:rxjava:$versions.rxJava"
+deps.rx = rx
+
+def javax = [:]
+javax.inject = "javax.inject:javax.inject:$versions.inject"
+javax.annotation = "javax.annotation:javax.annotation-api:$versions.annotation_api"
+deps.javax = javax
+
+def crashlytics = [:]
+crashlytics.gradle_plugin = "io.fabric.tools:gradle:1.+"
+crashlytics.runtime = 'com.crashlytics.sdk.android:crashlytics:2.7.1@aar'
+deps.crashlytics = crashlytics
+
+deps.facebook = "com.facebook.android:facebook-android-sdk:$versions.facebook"
 
 deps.android_gradle_plugin = "com.android.tools.build:gradle:$versions.gradlePlugin"
 deps.binding_compiler = "com.android.databinding:compiler:$versions.bindingCompiler"
 
-deps.okhttp = "com.squareup.okhttp3:okhttp:$versions.okHttp"
-deps.okhttp_logging = "com.squareup.okhttp3:logging-interceptor:$versions.okHttp"
-
 deps.gson = "com.google.code.gson:gson:$versions.gson"
 deps.sdp = "com.intuit.sdp:sdp-android:$versions.intuit"
 deps.ssp = "com.intuit.ssp:ssp-android:$versions.intuit"
-
-deps.rx_android = "io.reactivex.rxjava2:rxandroid:$versions.rxAndroid"
-deps.rx_java2 = "io.reactivex.rxjava2:rxjava:$versions.rxJava"
-deps.javax_inject = "javax.inject:javax.inject:$versions.inject"
-deps.javax_annotation_api = "javax.annotation:javax.annotation-api:$versions.annotation_api"
-
-deps.picasso = "com.squareup.picasso:picasso:$versions.picasso"
-deps.picasso_okhttp3_downloader = "com.jakewharton.picasso:picasso2-okhttp3-downloader:$versions.okhttp3"
-
-deps.glide = "com.github.bumptech.glide:glide:$versions.glide"
-deps.glide_compiler = "com.github.bumptech.glide:compiler:$versions.glide"
-deps.glide_annotations = "com.github.bumptech.glide:annotations:$versions.glide"
-deps.glide_okhttp3_downloader = "com.github.bumptech.glide:okhttp3-integration:$versions.glide"
 
 deps.paging = "android.arch.paging:runtime:$versions.paging"
 deps.dexmaker = "com.linkedin.dexmaker:dexmaker-mockito:$versions.dexmaker"

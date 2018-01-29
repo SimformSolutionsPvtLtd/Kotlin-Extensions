@@ -4,42 +4,4 @@
         <attr name="ariv_widthRatio" format="integer" />
         <attr name="ariv_heightRatio" format="integer" />
     </declare-styleable>
-
-    <declare-styleable name="MediaView">
-        <attr name="divider_size" format="dimension" />
-        <attr name="corner_radii" format="dimension" />
-        <attr name="background_color" format="color" />
-    </declare-styleable>
-
-    <declare-styleable name="FlowLayout">
-        <attr name="tbgFlow" format="boolean"/>
-        <attr name="tbgChildSpacing" format="enum|dimension">
-            <enum name="auto" value="-65536"/>
-        </attr>
-        <attr name="tbgChildSpacingForLastRow" format="enum|dimension">
-            <enum name="auto" value="-65536"/>
-            <enum name="align" value="-65537"/>
-        </attr>
-        <attr name="tbgRowSpacing" format="enum|dimension">
-            <enum name="auto" value="-65536"/>
-        </attr>
-        <attr name="tbgRtl" format="boolean"/>
-    </declare-styleable>
-
-    <declare-styleable name="ToggleButtonGroup">
-        <attr name="tbgCheckedButton" format="reference"/>
-    </declare-styleable>
-
-    <declare-styleable name="MultiSelectToggleGroup">
-        <attr name="tbgMaxSelect" format="integer"/>
-    </declare-styleable>
-
-    <declare-styleable name="MarkerButton">
-        <attr name="android:text"/>
-        <attr name="android:textColor"/>
-        <attr name="android:textSize"/>
-        <attr name="tbgMarkerColor" format="color"/>
-        <attr name="tbgRadioStyle" format="boolean"/>
-    </declare-styleable>
-
 </resources>

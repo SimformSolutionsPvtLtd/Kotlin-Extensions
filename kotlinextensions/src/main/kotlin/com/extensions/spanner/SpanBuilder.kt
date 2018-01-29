@@ -39,7 +39,7 @@ import android.text.style.UnderlineSpan
 import android.view.View
 import java.util.*
 
-@Suppress("unused")
+
 open class SpanBuilder {
 
     private val spans = ArrayList<SpanBuilder>()

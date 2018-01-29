@@ -29,7 +29,7 @@ fun Drawable.toBitmap(): Bitmap {
     return bitmap
 }
 
-@Suppress("unused")
+
 fun Context.getDrawableResId(name: String): Int {
     val resources = resources
     return resources.getIdentifier(name, "drawable", packageName)
@@ -41,5 +41,5 @@ fun Context.getDrawable(name: String):Drawable? {
     return ContextCompat.getDrawable(this, resourceId)
 }
 
-@Suppress("unused")
+
 fun Context.bitmapToDrawable(bitmap: Bitmap?): Drawable? = BitmapDrawable(this.resources, bitmap)

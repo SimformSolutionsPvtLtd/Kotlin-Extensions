@@ -2,7 +2,7 @@ package com.extensions.validation
 
 import com.extensions.validation.rules.ValidatorRule
 
-@Suppress("unused")
+
 class RuleCommand<in T> private constructor(rules: List<Rule<T>>) : Rule<T> {
     private val rules: MutableList<Rule<T>> = arrayListOf()
     override lateinit var errorMessage: String

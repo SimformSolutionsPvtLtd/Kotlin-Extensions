@@ -7,7 +7,7 @@ import android.util.AttributeSet
 import android.widget.ImageView
 import com.extensions.R
 
-@Suppress("unused")
+
 class AspectRatioImageView : ImageView {
     private var widthRatio: Int = 0
     private var heightRatio: Int = 0

@@ -76,22 +76,6 @@ public class RecyclerAdapter extends AbstractRecyclerAdapter {
     }
 
     @Override
-    protected int getBrVariable(int position) {
-        if (emptyViewLoader != null && isEmptyViewVisible && position == 0 && itemList.size() <= 0)
-            return -1;
-        else if (moreLoader != null && ((isLoadMoreReverse && position == 0) || ((!isLoadMoreReverse) && position == itemList.size()))) {
-            return -1;
-        } else {
-            Object item = itemList.get(isLoadMoreReverse ? position-1 : position);
-            int index = dataTypes.indexOf(item.getClass());
-            if (index == -1)
-                dataTypes.add(item.getClass());
-            index = dataTypes.indexOf(item.getClass());
-            return index;
-        }
-    }
-
-    @Override
     public int getItemViewType(int position) {
         if (emptyViewLoader != null && isEmptyViewVisible && position == 0 && itemList.size() <= 0)
             return TYPE_EMPTY_VIEW;

@@ -46,7 +46,7 @@ fun Bitmap.resize(newWidth: Int, newHeight: Int): Bitmap {
     return resizedBitmap
 }
 
-@Suppress("unused")
+
 fun Bitmap.toRoundCorner(radius: Float): Bitmap? {
     val width = this.width
     val height = this.height
@@ -64,7 +64,7 @@ fun Bitmap.toRoundCorner(radius: Float): Bitmap? {
     return bitmap
 }
 
-@Suppress("unused")
+
 fun Context.saveBitmapToFile(bitmap: Bitmap): File? {
     val file = getOutputMediaFile()
     file.outputStream().use {
@@ -73,7 +73,7 @@ fun Context.saveBitmapToFile(bitmap: Bitmap): File? {
     return file
 }
 
-@Suppress("unused")
+
 fun File.saveBitmapToFile(bitmap: Bitmap): File? {
     this.outputStream().use {
         bitmap.compress(Bitmap.CompressFormat.JPEG, 100, it)
@@ -92,7 +92,7 @@ private fun Context.getOutputMediaFile(): File {
     return File(folder, picName)
 }
 
-@Suppress("unused")
+
 fun drawableToBitmap(drawable: Drawable): Bitmap {
     if (drawable is BitmapDrawable) {
         return drawable.bitmap
@@ -111,7 +111,7 @@ fun drawableToBitmap(drawable: Drawable): Bitmap {
     return bitmap
 }
 
-@Suppress("unused")
+
 fun Context.requestMediaScanner(url: String) {
     val mediaScanIntent = Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE)
     val contentUri = Uri.fromFile(File(url))
@@ -119,7 +119,7 @@ fun Context.requestMediaScanner(url: String) {
     this.sendBroadcast(mediaScanIntent)
 }
 
-@Suppress("unused")
+
 fun downloadBitmap(imageUrl: String): Bitmap? {
     var bitmap: Bitmap? = null
     val url = URL(imageUrl)
@@ -133,7 +133,7 @@ fun downloadBitmap(imageUrl: String): Bitmap? {
     return bitmap
 }
 
-@Suppress("unused")
+
 fun Bitmap.resize(width: Int, height: Int, mode: ResizeMode = ResizeMode.AUTOMATIC, isExcludeAlpha: Boolean = false): Bitmap {
     var mWidth = width
     var mHeight = height

@@ -6,11 +6,10 @@ abstract class AbstractRecyclerAdapter extends RecyclerView.Adapter<RecyclerView
     @Override
     public final void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
         if(holder instanceof RecyclerBindingViewHolder)
-            ((RecyclerBindingViewHolder) holder).bind(getBrVariable(position), position, getItem(position));
+            ((RecyclerBindingViewHolder) holder).bind(position, getItem(position));
         else
             ((RecyclerViewHolder) holder).bind(position, getItem(position));
     }
 
     protected abstract Object getItem(int position);
-    protected abstract int getBrVariable(int position);
 }

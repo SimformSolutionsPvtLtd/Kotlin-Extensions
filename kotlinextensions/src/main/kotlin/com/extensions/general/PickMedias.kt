@@ -20,7 +20,7 @@ import com.extensions.interfaces.F2
 import java.text.SimpleDateFormat
 import java.util.*
 
-@Suppress("unused")
+
 class PickMediaExtensions private constructor() {
     /**
      * enable internal storage mode

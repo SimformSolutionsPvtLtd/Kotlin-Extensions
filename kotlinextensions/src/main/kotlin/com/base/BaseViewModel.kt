@@ -4,7 +4,7 @@ import android.arch.lifecycle.ViewModel
 import android.databinding.Observable
 import android.databinding.PropertyChangeRegistry
 
-@Suppress("unused")
+
 abstract class BaseViewModel : ViewModel(), Observable {
     val registry = PropertyChangeRegistry()
 

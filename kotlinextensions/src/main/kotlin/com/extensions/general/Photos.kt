@@ -14,43 +14,43 @@ private val options: BitmapFactory.Options by lazy {
     opt
 }
 
-@Suppress("unused")
+
 fun String.getImageWidth(): Int {
     BitmapFactory.decodeFile(this, options)
     return options.outWidth
 }
 
-@Suppress("unused")
+
 fun String.getImageHeight(): Int {
     BitmapFactory.decodeFile(this, options)
     return options.outHeight
 }
 
-@Suppress("unused")
+
 fun String.getImageMimeType(): String {
     BitmapFactory.decodeFile(this, options)
     return options.outMimeType ?: ""
 }
 
-@Suppress("unused")
+
 fun Context.getImageWidth(@DrawableRes resId: Int): Int {
     BitmapFactory.decodeResource(this.resources, resId, options)
     return options.outWidth
 }
 
-@Suppress("unused")
+
 fun Context.getImageHeight(@DrawableRes resId: Int): Int {
     BitmapFactory.decodeResource(this.resources, resId, options)
     return options.outHeight
 }
 
-@Suppress("unused")
+
 fun Context.getImageMimeType(@DrawableRes resId: Int): String {
     BitmapFactory.decodeResource(this.resources, resId, options)
     return options.outMimeType ?: ""
 }
 
-@Suppress("unused")
+
 fun getPhotoOrientationDegree(filePath: String?): Int {
     var degree = 0
     var exif: ExifInterface? = null
@@ -79,7 +79,7 @@ fun getPhotoOrientationDegree(filePath: String?): Int {
     return degree
 }
 
-@Suppress("unused")
+
 fun rotate(bitmap: Bitmap, degree: Int): Bitmap {
     val mat = Matrix()
     mat.postRotate(degree.toFloat())

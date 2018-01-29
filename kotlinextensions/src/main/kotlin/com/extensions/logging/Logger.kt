@@ -8,7 +8,7 @@ import java.util.*
 import java.util.Collections.unmodifiableList
 import java.util.regex.Pattern
 
-@Suppress("unused")
+
 object Logger {
 
     /**
@@ -808,17 +808,17 @@ object Logger {
     }
 }
 
-@Suppress("unused")
+
 fun Any?.d() = Logger.TREE_OF_SOULS.d(this ?: "null")
 
-@Suppress("unused")
+
 fun Any?.e() = Logger.TREE_OF_SOULS.e(this ?: "null")
 
-@Suppress("unused")
+
 fun Any?.i() = Logger.TREE_OF_SOULS.i(this ?: "null")
 
-@Suppress("unused")
+
 fun Any?.wtf() = Logger.TREE_OF_SOULS.wtf(this ?: "null")
 
-@Suppress("unused")
+
 fun Any?.w() = Logger.TREE_OF_SOULS.w(this ?: "null")

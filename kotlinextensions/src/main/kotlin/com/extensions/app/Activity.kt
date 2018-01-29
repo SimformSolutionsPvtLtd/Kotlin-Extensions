@@ -57,7 +57,7 @@ fun Activity.hideToolbar() {
     actionBar?.hide()
 }
 
-@Suppress("unused")
+
 @SuppressLint("ObsoleteSdkInt")
 fun Activity.toggleHideByBar(isHide: Boolean) {
     val uiOptions = window.decorView.systemUiVisibility
@@ -152,12 +152,12 @@ fun Activity.finishAllCurrentActivity() {
     overridePendingTransition(R.anim.slide_from_left, R.anim.slide_to_right)
 }
 
-@Suppress("unused")
+
 fun Activity.addFragment(@IdRes frameId : Int, fragment: Fragment) {
     addFragment(frameId, fragment, null, 0)
 }
 
-@Suppress("unused")
+
 fun Activity.addFragment(@IdRes frameId : Int, fragment: Fragment, addToBackStack: Boolean) {
     addFragment(frameId, fragment, null, addToBackStack, 0)
 }
@@ -211,14 +211,14 @@ fun Activity.loadFragment(@IdRes frameId : Int, fragment: Fragment, fragmentToTa
     fragmentTransaction.commit()
 }
 
-@Suppress("unused")
+
 fun Activity.showDialogFragment(dialogFragment: DialogFragment) {
     val fragmentTransaction = fragmentManager.beginTransaction()
     fragmentTransaction.add(dialogFragment, null)
     fragmentTransaction.commit()
 }
 
-@Suppress("unused")
+
 fun Activity.showDialogFragment(dialogFragment: DialogFragment, targetFragment: Fragment, requestCode: Int) {
     val fragmentTransaction = fragmentManager.beginTransaction()
     dialogFragment.setTargetFragment(targetFragment, requestCode)
@@ -226,7 +226,7 @@ fun Activity.showDialogFragment(dialogFragment: DialogFragment, targetFragment: 
     fragmentTransaction.commit()
 }
 
-@Suppress("unused")
+
 fun Activity.showDialogFragment(dialogFragment: DialogFragment, targetFragment: DialogFragment, requestCode: Int) {
     val fragmentTransaction = fragmentManager.beginTransaction()
     dialogFragment.setTargetFragment(targetFragment, requestCode)
@@ -234,22 +234,22 @@ fun Activity.showDialogFragment(dialogFragment: DialogFragment, targetFragment: 
     fragmentTransaction.commit()
 }
 
-@Suppress("unused")
+
 fun Activity.getCurrentFragmentManager(): FragmentManager? {
     return fragmentManager
 }
 
-@Suppress("unused")
+
 fun Activity.getCurrentActiveFragment(@IdRes frameId : Int): Fragment {
     return fragmentManager.findFragmentById(frameId)
 }
 
-@Suppress("unused")
+
 fun Activity.clearAllFragment() {
     fragmentManager.popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE)
 }
 
-@Suppress("unused")
+
 fun Activity.onBackTrackFragment(): Boolean {
     return if (fragmentManager.backStackEntryCount != 0) {
         fragmentManager.popBackStack()

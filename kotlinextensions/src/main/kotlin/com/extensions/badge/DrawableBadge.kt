@@ -13,7 +13,7 @@ import android.support.v4.content.res.ResourcesCompat
 import android.text.TextPaint
 import com.extensions.R
 
-@Suppress("unused")
+
 class DrawableBadge private constructor(val context :Context,
                                         @ColorInt val textColor :Int,
                                         @ColorInt val badgeColor :Int,

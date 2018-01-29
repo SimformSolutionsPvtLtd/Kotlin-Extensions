@@ -6,7 +6,7 @@ import android.util.Log
 import com.extensions.BuildConfig
 import java.text.DecimalFormat
 
-@Suppress("unused")
+
 inline fun <T, R> T.tryCatch(block :(T) -> R) :R {
     try {
         return block(this)
@@ -40,7 +40,7 @@ internal inline fun <T, R> T.convertAcceptNull(block :(T) -> R, def :Any?) :R? =
         def as R
     }
 
-@Suppress("unused")
+
 fun toNumFormat(num :String) :String {
     val df = DecimalFormat("#,###")
     return df.format(Integer.parseInt(num))

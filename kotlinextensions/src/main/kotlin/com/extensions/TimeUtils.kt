@@ -7,7 +7,7 @@ interface TimeUnit {
     }
 }
 
-@Suppress("unused")
+
 class Interval<out T : TimeUnit>(value: Number, val factory: () -> T) {
 
     companion object {
@@ -110,31 +110,31 @@ class Nanosecond : TimeUnit {
     override val timeIntervalRatio = 1e-9
 }
 
-@Suppress("unused")
+
 val Number.days: Interval<Day>
     get() = Interval(this)
 
-@Suppress("unused")
+
 val Number.hours: Interval<Hour>
     get() = Interval(this)
 
-@Suppress("unused")
+
 val Number.minutes: Interval<Minute>
     get() = Interval(this)
 
-@Suppress("unused")
+
 val Number.seconds: Interval<Second>
     get() = Interval(this)
 
-@Suppress("unused")
+
 val Number.milliseconds: Interval<Millisecond>
     get() = Interval(this)
 
-@Suppress("unused")
+
 val Number.microseconds: Interval<Microsecond>
     get() = Interval(this)
 
-@Suppress("unused")
+
 val Number.nanoseconds: Interval<Nanosecond>
     get() = Interval(this)
 

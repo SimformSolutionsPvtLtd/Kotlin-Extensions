@@ -10,7 +10,8 @@ import java.text.SimpleDateFormat
 import java.util.*
 
 fun String.isValidEmail(): Boolean {
-    return !TextUtils.isEmpty(this) && android.util.Patterns.EMAIL_ADDRESS.matcher(this).matches()
+    return !matches(Regex("^([a-zA-Z0-9_.-])+@([a-zA-Z0-9_.-])+\\.([a-zA-Z])+([a-zA-Z])+"))
+    //return !TextUtils.isEmpty(this) && android.util.Patterns.EMAIL_ADDRESS.matcher(this).matches()
 }
 
 fun String.isUrl(): Boolean {
@@ -70,4 +71,72 @@ fun String.toDate(withFormat: String = "yyyy/MM/dd hh:mm"): Date {
 
 fun String.plainText(): String {
     return android.text.Html.fromHtml(this).toString()
+}
+
+fun String?.isNull(): Boolean {
+    return this == null || this.equals("null", ignoreCase = true) || this.trim { it <= ' ' }.isEmpty()
+}
+
+fun String?.isNotNull(): Boolean {
+    return !isNull()
+}
+
+
+fun String?.isEqual(str2: String?): Boolean {
+    return isNotNull() && str2.isNotNull() && equals(str2, ignoreCase = true)
+}
+
+
+fun String?.isNotEqual(str2: String?): Boolean {
+    return isNotNull() && str2.isNotNull() && !equals(str2, ignoreCase = true)
+}
+
+
+fun String.noNumbers(): Boolean {
+    return matches(Regex(".*\\d.*"))
+}
+
+
+fun String.onlyNumbers(): Boolean {
+    return !matches(Regex("\\d+"))
+}
+
+
+fun String.allUpperCase(): Boolean {
+    return toUpperCase() != this
+}
+
+
+fun String.allLowerCase(): Boolean {
+    return toLowerCase() != this
+}
+
+
+fun String.atLeastOneLowerCase(): Boolean {
+    return matches(Regex("[A-Z0-9]+"))
+}
+
+
+fun String.atLeastOneUpperCase(): Boolean {
+    return matches(Regex("[a-z0-9]+"))
+}
+
+
+fun String.atLeastOneNumber(): Boolean {
+    return !matches(Regex(".*\\d.*"))
+}
+
+
+fun String.startsWithNonNumber(): Boolean {
+    return Character.isDigit(this[0])
+}
+
+
+fun String.noSpecialCharacter(): Boolean {
+    return !matches(Regex("[A-Za-z0-9]+"))
+}
+
+
+fun String.atLeastOneSpecialCharacter(): Boolean {
+    return matches(Regex("[A-Za-z0-9]+"))
 }

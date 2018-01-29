@@ -21,7 +21,7 @@ import android.view.Window
 import android.view.WindowManager
 import android.widget.FrameLayout
 
-@Suppress("unused")
+
 class BottomSheetDialog :AppCompatDialog {
     private var mBehavior :BottomSheetBehavior<FrameLayout>? = null
     private var mCancelable = true
