@@ -16,3 +16,13 @@
 * Dagger 2.
 * RxJava 2.
 
+# Add Build.gradle file
+```gradle
+//Add Dependencies for app level build.gradle
+repositories {
+    mavenCentral()
+}
+dependencies {
+  implementation 'com.kevadiyakrunalk:kotlinextensions:1.0.0'
+}
+```
