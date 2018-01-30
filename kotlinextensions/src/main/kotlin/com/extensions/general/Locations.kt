@@ -26,10 +26,10 @@ import com.google.android.gms.location.LocationListener
 import com.google.android.gms.location.LocationRequest
 import com.google.android.gms.location.LocationServices
 import java.io.IOException
-import java.util.*
+import java.util.Locale
 
 @SuppressLint("MissingPermission", "Registered")
-class Locations : Service() {
+class Locations :Service() {
     private val localBinder = LocalBinder()
     private val sensorEventListener = SensorListener()
     private val fusedLocationListener = MyLocationListener()
@@ -44,16 +44,14 @@ class Locations : Service() {
         private val FASTEST_INTERVAL_IN_MS = 1000L
     }
 
-    private var axisX: Int = 0
-    private var axisY: Int = 0
-    private var bearing: Float = 0f
-    private var isFusedLocationApi: Boolean = false
-    private var currentBestLocation: Location? = null
-    private var locationCallback: LocationCallback? = null
-
-    override fun onBind(intent: Intent?) = localBinder
-
-    override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
+    private var axisX :Int = 0
+    private var axisY :Int = 0
+    private var bearing :Float = 0f
+    private var isFusedLocationApi :Boolean = false
+    private var currentBestLocation :Location? = null
+    private var locationCallback :LocationCallback? = null
+    override fun onBind(intent :Intent?) = localBinder
+    override fun onStartCommand(intent :Intent?, flags :Int, startId :Int) :Int {
         super.onStartCommand(intent, flags, startId)
         if(intent != null && intent.hasExtra(ARG_FUSED_LOCATION))
             isFusedLocationApi = intent.getBooleanExtra(ARG_FUSED_LOCATION, false)
@@ -128,14 +126,13 @@ class Locations : Service() {
             bestLastKnownLocation?.bearing = bearing
             locationCallback?.onSuccess(currentBestLocation as Location)
         }
-
         val mSensor = sensorManager.getDefaultSensor(Sensor.TYPE_ROTATION_VECTOR)
         sensorManager.registerListener(sensorEventListener, mSensor, SensorManager.SENSOR_DELAY_NORMAL * 5)
     }
 
     private fun getContinuousLocation() {
         if(checkIfLocationIsEnabled()) {
-            class BackgroundTask : AsyncTask<Void, Void, Void>() {
+            class BackgroundTask :AsyncTask<Void, Void, Void>() {
                 override fun doInBackground(vararg params :Void?) :Void? {
                     val locationRequest = LocationRequest()
                     locationRequest.interval = FASTEST_INTERVAL_IN_MS
@@ -149,7 +146,7 @@ class Locations : Service() {
             locationCallback?.locationDisabled()
     }
 
-    fun setLocationCallback(callback: LocationCallback) {
+    fun setLocationCallback(callback :LocationCallback) {
         locationCallback = callback
     }
 
@@ -159,66 +156,62 @@ class Locations : Service() {
         sensorManager.unregisterListener(sensorEventListener)
     }
 
-    private fun isBetterLocation(location: Location, currentBestLocation: Location?): Boolean {
-        if (currentBestLocation == null)
+    private fun isBetterLocation(location :Location, currentBestLocation :Location?) :Boolean {
+        if(currentBestLocation == null)
             return true
-
         val timeDelta = location.time - currentBestLocation.time
         val isSignificantlyNewer = timeDelta > TWO_MINUTES
         val isSignificantlyOlder = timeDelta < -TWO_MINUTES
         val isNewer = timeDelta > 0
 
-        if (isSignificantlyNewer) {
+        if(isSignificantlyNewer) {
             return true
-        } else if (isSignificantlyOlder) {
+        } else if(isSignificantlyOlder) {
             return false
         }
-
         val accuracyDelta = (location.accuracy - currentBestLocation.accuracy).toInt()
         val isLessAccurate = accuracyDelta > 0
         val isMoreAccurate = accuracyDelta < 0
         val isSignificantlyLessAccurate = accuracyDelta > 200
         val isFromSameProvider = isSameProvider(location.provider, currentBestLocation.provider)
 
-        if (isMoreAccurate) {
+        if(isMoreAccurate) {
             return true
-        } else if (isNewer && !isLessAccurate) {
+        } else if(isNewer && !isLessAccurate) {
             return true
-        } else if (isNewer && !isSignificantlyLessAccurate && isFromSameProvider) {
+        } else if(isNewer && !isSignificantlyLessAccurate && isFromSameProvider) {
             return true
         }
         return false
     }
 
-    private fun isSameProvider(provider1: String?, provider2: String?): Boolean = if (provider1 == null) provider2 == null else provider1 == provider2
-
+    private fun isSameProvider(provider1 :String?, provider2 :String?) :Boolean = if(provider1 == null) provider2 == null else provider1 == provider2
     private fun checkIfLocationIsEnabled() :Boolean = (locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER) || locationManager.isProviderEnabled(LocationManager.NETWORK_PROVIDER))
-
-    private inner class LocationChangeListener : android.location.LocationListener {
-        override fun onLocationChanged(location: Location?) {
-            if (location == null)
+    private inner class LocationChangeListener :android.location.LocationListener {
+        override fun onLocationChanged(location :Location?) {
+            if(location == null)
                 return
 
-            if (isBetterLocation(location, currentBestLocation)) {
+            if(isBetterLocation(location, currentBestLocation)) {
                 currentBestLocation = location
                 currentBestLocation?.bearing = bearing
                 locationCallback?.onSuccess(currentBestLocation as Location)
             }
         }
 
-        override fun onProviderDisabled(provider: String?) {}
-        override fun onProviderEnabled(provider: String?) {}
-        override fun onStatusChanged(provider: String?, status: Int, extras: Bundle?) {}
+        override fun onProviderDisabled(provider :String?) {}
+        override fun onProviderEnabled(provider :String?) {}
+        override fun onStatusChanged(provider :String?, status :Int, extras :Bundle?) {}
     }
 
-    private inner class SensorListener : SensorEventListener {
-        override fun onAccuracyChanged(sensor: Sensor?, accuracy: Int) {
-            if (sensor?.type == Sensor.TYPE_ROTATION_VECTOR) {
+    private inner class SensorListener :SensorEventListener {
+        override fun onAccuracyChanged(sensor :Sensor?, accuracy :Int) {
+            if(sensor?.type == Sensor.TYPE_ROTATION_VECTOR) {
                 Logger.i("Rotation sensor accuracy changed to: " + accuracy)
             }
         }
 
-        override fun onSensorChanged(event: SensorEvent?) {
+        override fun onSensorChanged(event :SensorEvent?) {
             val rotationMatrix = FloatArray(16)
             SensorManager.getRotationMatrixFromVector(rotationMatrix, event?.values)
             val orientationValues = FloatArray(3)
@@ -230,16 +223,16 @@ class Locations : Service() {
             val azimuth = Math.toDegrees(orientationValues[0].toDouble())
             val abs = Math.abs(bearing.minus(azimuth).toFloat()) > MIN_BEARING_DIFF
 
-            if (abs) {
+            if(abs) {
                 bearing = azimuth.toFloat()
                 currentBestLocation?.bearing = bearing
             }
         }
     }
 
-    private inner class MyLocationListener : LocationListener {
+    private inner class MyLocationListener :LocationListener {
         override fun onLocationChanged(location :Location) {
-            if (isBetterLocation(location, currentBestLocation)) {
+            if(isBetterLocation(location, currentBestLocation)) {
                 currentBestLocation = location
                 currentBestLocation?.bearing = bearing
                 locationCallback?.onSuccess(currentBestLocation as Location)
@@ -250,7 +243,7 @@ class Locations : Service() {
     private fun readDisplayRotation() {
         axisX = SensorManager.AXIS_X
         axisY = SensorManager.AXIS_Y
-        when (windowManager.defaultDisplay.rotation) {
+        when(windowManager.defaultDisplay.rotation) {
             Surface.ROTATION_90 -> {
                 axisX = SensorManager.AXIS_Y
                 axisY = SensorManager.AXIS_MINUS_X
@@ -263,39 +256,36 @@ class Locations : Service() {
         }
     }
 
-    inner class LocalBinder : Binder() {
-        val service: Locations
+    inner class LocalBinder :Binder() {
+        val service :Locations
             get() = this@Locations
     }
 
     //Address
-    private fun Context.getGeoCoderAddress(): List<Address>? {
+    private fun Context.getGeoCoderAddress() :List<Address>? {
         val geoCoder = Geocoder(this, Locale.ENGLISH)
         try {
-            return geoCoder.getFromLocation(currentBestLocation?.latitude ?: 0.0, currentBestLocation?.longitude ?: 0.0, 1)
-        } catch (e: IOException) {
+            return geoCoder.getFromLocation(currentBestLocation?.latitude
+                ?: 0.0, currentBestLocation?.longitude ?: 0.0, 1)
+        } catch(e :IOException) {
             Logger.e("Impossible to connect to Geocoder" + e.toString())
         }
 
         return null
     }
 
-    private fun Context.getFirstAddress(): Address? {
+    private fun Context.getFirstAddress() :Address? {
         val addresses = getGeoCoderAddress()
-        return if (addresses != null && addresses.isNotEmpty())
+        return if(addresses != null && addresses.isNotEmpty())
             addresses[0]
         else
             null
     }
 
-    fun Context.getAddressLine(): String = getFirstAddress()?.getAddressLine(0) ?: ""
-
-    fun Context.getLocality(): String = getFirstAddress()?.locality ?: ""
-
-    fun Context.getPostalCode(): String = getFirstAddress()?.postalCode ?: ""
-
-    fun Context.getCountryName(): String = getFirstAddress()?.countryName ?: ""
-
+    fun Context.getAddressLine() :String = getFirstAddress()?.getAddressLine(0) ?: ""
+    fun Context.getLocality() :String = getFirstAddress()?.locality ?: ""
+    fun Context.getPostalCode() :String = getFirstAddress()?.postalCode ?: ""
+    fun Context.getCountryName() :String = getFirstAddress()?.countryName ?: ""
     interface LocationCallback {
         fun locationDisabled()
         fun onSuccess(location :Location)

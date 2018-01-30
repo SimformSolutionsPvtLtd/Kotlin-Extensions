@@ -2,15 +2,6 @@ apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android' // Enables android kotlin support
 apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt' // Enables anotation processor support
-apply plugin: 'com.diffplug.gradle.spotless'
-
-spotless {
-    kotlin {
-        target "**/*.kt"
-        ktlint()
-        licenseHeaderFile '../spotless/copyright.kt'
-    }
-}
 
 kapt {
     generateStubs = true
@@ -45,6 +36,10 @@ android {
 
     androidExtensions {
         experimental = true
+    }
+
+    lintOptions {
+        abortOnError false
     }
 
     compileOptions {

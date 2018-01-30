@@ -11,8 +11,6 @@ import android.support.v7.app.AppCompatActivity
 import com.extensions.addToBackStrack
 import com.extensions.content.Permission
 import com.extensions.content.isPermissionsGranted
-import com.extensions.content.showLongToast
-import com.extensions.content.showShortToast
 import com.extensions.TransactionType
 
 fun AppCompatActivity.showToolbar() {

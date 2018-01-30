@@ -2,21 +2,26 @@
 
 package com.extensions.app
 
-import android.app.*
+import android.app.Activity
+import android.app.DialogFragment
+import android.app.Fragment
+import android.app.FragmentManager
+import android.app.Service
 import android.content.ComponentName
 import android.content.Intent
 import android.os.Build
 import android.support.annotation.IdRes
 import android.support.annotation.RequiresApi
-import android.support.annotation.StringRes
 import android.view.View
 import android.view.WindowManager
 import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
-import com.extensions.addToBackStrack
-import com.extensions.content.*
-import com.extensions.view.findView
 import com.extensions.TransactionType
+import com.extensions.addToBackStrack
+import com.extensions.content.Permission
+import com.extensions.content.inputMethodManager
+import com.extensions.content.intentFor
+import com.extensions.view.findView
 
 inline fun <V : View> Fragment.findView(
     @IdRes id: Int,

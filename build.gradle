@@ -11,10 +11,6 @@ buildscript {
     }
 }
 
-plugins {
-    id "com.diffplug.gradle.spotless" version "3.6.0"
-}
-
 allprojects {
     addRepos(repositories)
     addProjectSetting()
