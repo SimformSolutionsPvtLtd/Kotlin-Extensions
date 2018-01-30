@@ -134,22 +134,3 @@ fun AppCompatActivity.isPermissionsGranted(vararg permissions: String): Boolean 
 fun AppCompatActivity.requestPermissions(requestCode: Int, vararg permissions:Permission) {
     requestPermissions(permissions.map(Permission::value).toTypedArray(), requestCode)
 }
-
-/**
- * Toasts
- */
-fun AppCompatActivity.showShortToast(@StringRes resId: Int) {
-    showShortToast(resId)
-}
-
-fun AppCompatActivity.showShortToast(text: String) {
-    showShortToast(text)
-}
-
-fun AppCompatActivity.showLongToast(@StringRes resId: Int) {
-    showLongToast(resId)
-}
-
-fun AppCompatActivity.showLongToast(text: String) {
-    showLongToast(text)
-}

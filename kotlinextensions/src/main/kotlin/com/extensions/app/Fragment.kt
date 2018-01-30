@@ -143,25 +143,6 @@ fun Fragment.clearAllFragment() {
 fun Fragment.onBackTrackFragment(): Boolean = (activity as Activity).onBackTrackFragment()
 
 /**
- * Toasts
- */
-fun Fragment.showShortToast(@StringRes resId: Int) {
-    activity!!.showShortToast(resId)
-}
-
-fun Fragment.showShortToast(text: String) {
-    activity!!.showShortToast(text)
-}
-
-fun Fragment.showLongToast(@StringRes resId: Int) {
-    activity!!.showLongToast(resId)
-}
-
-fun Fragment.showLongToast(text: String) {
-    activity!!.showLongToast(text)
-}
-
-/**
  * Permissions
  */
 fun Fragment.isPermissionsGranted(vararg permissions: Permission): Boolean =
