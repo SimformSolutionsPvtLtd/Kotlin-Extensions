@@ -11,8 +11,6 @@ import android.support.v7.app.AppCompatActivity
 import com.extensions.addToBackStrack
 import com.extensions.content.Permission
 import com.extensions.content.isPermissionsGranted
-import com.extensions.content.showLongToast
-import com.extensions.content.showShortToast
 import com.extensions.TransactionType
 
 fun AppCompatActivity.showToolbar() {
@@ -133,23 +131,4 @@ fun AppCompatActivity.isPermissionsGranted(vararg permissions: String): Boolean 
 @RequiresApi(Build.VERSION_CODES.M)
 fun AppCompatActivity.requestPermissions(requestCode: Int, vararg permissions:Permission) {
     requestPermissions(permissions.map(Permission::value).toTypedArray(), requestCode)
-}
-
-/**
- * Toasts
- */
-fun AppCompatActivity.showShortToast(@StringRes resId: Int) {
-    showShortToast(resId)
-}
-
-fun AppCompatActivity.showShortToast(text: String) {
-    showShortToast(text)
-}
-
-fun AppCompatActivity.showLongToast(@StringRes resId: Int) {
-    showLongToast(resId)
-}
-
-fun AppCompatActivity.showLongToast(text: String) {
-    showLongToast(text)
 }

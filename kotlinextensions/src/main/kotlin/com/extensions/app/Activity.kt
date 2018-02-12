@@ -20,8 +20,6 @@ import com.extensions.addToBackStrack
 import com.extensions.content.Permission
 import com.extensions.content.intentFor
 import com.extensions.content.isPermissionsGranted
-import com.extensions.content.showLongToast
-import com.extensions.content.showShortToast
 import com.extensions.TransactionType
 
 /**
@@ -270,23 +268,4 @@ fun Activity.isPermissionsGranted(vararg permissions: String): Boolean =
 @RequiresApi(Build.VERSION_CODES.M)
 fun Activity.requestPermissions(requestCode: Int, vararg permissions:Permission) {
     requestPermissions(permissions.map(Permission::value).toTypedArray(), requestCode)
-}
-
-/**
- * Toasts
- */
-fun Activity.showShortToast(@StringRes resId: Int) {
-    showShortToast(resId)
-}
-
-fun Activity.showShortToast(text: String) {
-    showShortToast(text)
-}
-
-fun Activity.showLongToast(@StringRes resId: Int) {
-    showLongToast(resId)
-}
-
-fun Activity.showLongToast(text: String) {
-    showLongToast(text)
 }

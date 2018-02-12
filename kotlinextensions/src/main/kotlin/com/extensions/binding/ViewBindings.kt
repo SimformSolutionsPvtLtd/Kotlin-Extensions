@@ -6,14 +6,17 @@ import android.app.Fragment
 import android.support.annotation.IdRes
 import android.support.annotation.RestrictTo
 import android.view.View
-import com.extensions.binding.util.*
+import com.extensions.binding.util.Required
+import com.extensions.binding.util.defaultViewAbsence
+import com.extensions.binding.util.defaultViewsAbsence
+import com.extensions.binding.util.genericViewFinder
+import com.extensions.binding.util.viewProvider
 import kotlin.properties.ReadOnlyProperty
 import kotlin.reflect.KProperty
 
 //=============================
 //      View
 //=============================
-
 /**
  * Binds view with specified `id` into read-only property of View or throws exception
  *
@@ -22,8 +25,7 @@ import kotlin.reflect.KProperty
  * @throws IllegalStateException if view isn't found
  * @throws ClassCastException if view can't be casted to specified class
  */
-fun <V : View> View.view(@IdRes id: Int): ReadOnlyProperty<View, V>
-        = requiredView(this, this::viewProvider, id)
+fun <V :View> View.view(@IdRes id :Int) :ReadOnlyProperty<View, V> = requiredView(this, this::viewProvider, id)
 
 /**
  * Binds view with specified `id` or null into nullable read-only property of View
@@ -32,8 +34,7 @@ fun <V : View> View.view(@IdRes id: Int): ReadOnlyProperty<View, V>
  *
  * @throws ClassCastException if view can't be casted to specified class
  */
-fun <V : View> View.viewOptional(@IdRes id: Int): ReadOnlyProperty<View, V?>
-        = optionalView(this::viewProvider, id)
+fun <V :View> View.viewOptional(@IdRes id :Int) :ReadOnlyProperty<View, V?> = optionalView(this::viewProvider, id)
 
 /**
  * Binds views with specified `id` into read-only property of View or throws exception
@@ -43,8 +44,7 @@ fun <V : View> View.viewOptional(@IdRes id: Int): ReadOnlyProperty<View, V?>
  * @throws IllegalStateException if view isn't found
  * @throws ClassCastException if one or more view can't be casted to specified class
  */
-fun <V : View> View.views(vararg @IdRes ids: Int): ReadOnlyProperty<View, List<V>>
-        = requiredViews(this, this::viewProvider, ids)
+fun <V :View> View.views(vararg @IdRes ids :Int) :ReadOnlyProperty<View, List<V>> = requiredViews(this, this::viewProvider, ids)
 
 /**
  * Binds views with specified `id` or null into read-only property of View.
@@ -54,14 +54,10 @@ fun <V : View> View.views(vararg @IdRes ids: Int): ReadOnlyProperty<View, List<V
  *
  * @throws ClassCastException if one or more view can't be casted to specified class
  */
-fun <V : View> View.viewsOptional(vararg @IdRes ids: Int): ReadOnlyProperty<View, List<V?>>
-        = optionalViews(this::viewProvider, ids)
-
-
+fun <V :View> View.viewsOptional(vararg @IdRes ids :Int) :ReadOnlyProperty<View, List<V?>> = optionalViews(this::viewProvider, ids)
 //=============================
 //      Activity
 //=============================
-
 /**
  * Binds view with specified `id` into read-only property of Activity or throws exception
  *
@@ -70,8 +66,7 @@ fun <V : View> View.viewsOptional(vararg @IdRes ids: Int): ReadOnlyProperty<View
  * @throws IllegalStateException if view isn't found
  * @throws ClassCastException if view can't be casted to specified class
  */
-fun <V : View> Activity.view(@IdRes id: Int): ReadOnlyProperty<Activity, V>
-        = requiredView(this, this::viewProvider, id)
+fun <V :View> Activity.view(@IdRes id :Int) :ReadOnlyProperty<Activity, V> = requiredView(this, this::viewProvider, id)
 
 /**
  * Binds view with specified `id` or null into nullable read-only property of Activity
@@ -80,8 +75,7 @@ fun <V : View> Activity.view(@IdRes id: Int): ReadOnlyProperty<Activity, V>
  *
  * @throws ClassCastException if view can't be casted to specified class
  */
-fun <V : View> Activity.viewOptional(@IdRes id: Int): ReadOnlyProperty<Activity, V?>
-        = optionalView(this::viewProvider, id)
+fun <V :View> Activity.viewOptional(@IdRes id :Int) :ReadOnlyProperty<Activity, V?> = optionalView(this::viewProvider, id)
 
 /**
  * Binds views with specified `id` into read-only property of Activity or throws exception
@@ -91,8 +85,7 @@ fun <V : View> Activity.viewOptional(@IdRes id: Int): ReadOnlyProperty<Activity,
  * @throws IllegalStateException if view isn't found
  * @throws ClassCastException if one or more view can't be casted to specified class
  */
-fun <V : View> Activity.views(vararg @IdRes ids: Int): ReadOnlyProperty<Activity, List<V>>
-        = requiredViews(this, this::viewProvider, ids)
+fun <V :View> Activity.views(vararg @IdRes ids :Int) :ReadOnlyProperty<Activity, List<V>> = requiredViews(this, this::viewProvider, ids)
 
 /**
  * Binds views with specified `id` or null into read-only property of Activity.
@@ -102,14 +95,10 @@ fun <V : View> Activity.views(vararg @IdRes ids: Int): ReadOnlyProperty<Activity
  *
  * @throws ClassCastException if one or more view can't be casted to specified class
  */
-fun <V : View> Activity.viewsOptional(vararg @IdRes ids: Int): ReadOnlyProperty<Activity, List<V?>>
-        = optionalViews(this::viewProvider, ids)
-
-
+fun <V :View> Activity.viewsOptional(vararg @IdRes ids :Int) :ReadOnlyProperty<Activity, List<V?>> = optionalViews(this::viewProvider, ids)
 //=============================
 //      Fragment
 //=============================
-
 /**
  * Binds view with specified `id` into read-only property of Fragment or throws exception
  *
@@ -118,9 +107,7 @@ fun <V : View> Activity.viewsOptional(vararg @IdRes ids: Int): ReadOnlyProperty<
  * @throws IllegalStateException if view isn't found
  * @throws ClassCastException if view can't be casted to specified class
  */
-fun <V : View> Fragment.view(@IdRes id: Int): ReadOnlyProperty<Fragment, V>
-        = requiredView(this, this::viewProvider, id)
-
+fun <V :View> Fragment.view(@IdRes id :Int) :ReadOnlyProperty<Fragment, V> = requiredView(this, this::viewProvider, id)
 
 /**
  * Binds view with specified `id` or null into nullable read-only property of Fragment
@@ -129,8 +116,7 @@ fun <V : View> Fragment.view(@IdRes id: Int): ReadOnlyProperty<Fragment, V>
  *
  * @throws ClassCastException if view can't be casted to specified class
  */
-fun <V : View> Fragment.viewOptional(@IdRes id: Int): ReadOnlyProperty<Fragment, V?>
-        = optionalView(this::viewProvider, id)
+fun <V :View> Fragment.viewOptional(@IdRes id :Int) :ReadOnlyProperty<Fragment, V?> = optionalView(this::viewProvider, id)
 
 /**
  * Binds views with specified `id` into read-only property of Fragment or throws exception
@@ -140,8 +126,7 @@ fun <V : View> Fragment.viewOptional(@IdRes id: Int): ReadOnlyProperty<Fragment,
  * @throws IllegalStateException if view isn't found
  * @throws ClassCastException if one or more view can't be casted to specified class
  */
-fun <V : View> Fragment.views(vararg @IdRes ids: Int): ReadOnlyProperty<Fragment, List<V>>
-        = requiredViews(this, this::viewProvider, ids)
+fun <V :View> Fragment.views(vararg @IdRes ids :Int) :ReadOnlyProperty<Fragment, List<V>> = requiredViews(this, this::viewProvider, ids)
 
 /**
  * Binds views with specified `id` or null into read-only property of Fragment.
@@ -151,10 +136,7 @@ fun <V : View> Fragment.views(vararg @IdRes ids: Int): ReadOnlyProperty<Fragment
  *
  * @throws ClassCastException if one or more view can't be casted to specified class
  */
-fun <V : View> Fragment.viewsOptional(vararg @IdRes ids: Int): ReadOnlyProperty<Fragment, List<V?>>
-        = optionalViews(this::viewProvider, ids)
-
-
+fun <V :View> Fragment.viewsOptional(vararg @IdRes ids :Int) :ReadOnlyProperty<Fragment, List<V?>> = optionalViews(this::viewProvider, ids)
 //=============================
 //      Dialog
 //=============================
@@ -166,8 +148,7 @@ fun <V : View> Fragment.viewsOptional(vararg @IdRes ids: Int): ReadOnlyProperty<
  * @throws IllegalStateException if view isn't found
  * @throws ClassCastException if view can't be casted to specified class
  */
-fun <V : View> Dialog.view(@IdRes id: Int): ReadOnlyProperty<Dialog, V>
-        = requiredView(this, this::viewProvider, id)
+fun <V :View> Dialog.view(@IdRes id :Int) :ReadOnlyProperty<Dialog, V> = requiredView(this, this::viewProvider, id)
 
 /**
  * Binds view with specified `id` or null into nullable read-only property of Dialog
@@ -176,8 +157,7 @@ fun <V : View> Dialog.view(@IdRes id: Int): ReadOnlyProperty<Dialog, V>
  *
  * @throws ClassCastException if view can't be casted to specified class
  */
-fun <V : View> Dialog.viewOptional(@IdRes id: Int): ReadOnlyProperty<Dialog, V?>
-        = optionalView(this::viewProvider, id)
+fun <V :View> Dialog.viewOptional(@IdRes id :Int) :ReadOnlyProperty<Dialog, V?> = optionalView(this::viewProvider, id)
 
 /**
  * Binds views with specified `id` into read-only property of Dialog or throws exception
@@ -187,8 +167,7 @@ fun <V : View> Dialog.viewOptional(@IdRes id: Int): ReadOnlyProperty<Dialog, V?>
  * @throws IllegalStateException if view isn't found
  * @throws ClassCastException if one or more view can't be casted to specified class
  */
-fun <V : View> Dialog.views(vararg @IdRes ids: Int): ReadOnlyProperty<Dialog, List<V>>
-        = requiredViews(this, this::viewProvider, ids)
+fun <V :View> Dialog.views(vararg @IdRes ids :Int) :ReadOnlyProperty<Dialog, List<V>> = requiredViews(this, this::viewProvider, ids)
 
 /**
  * Binds views with specified `id` or null into read-only property of Dialog.
@@ -198,14 +177,10 @@ fun <V : View> Dialog.views(vararg @IdRes ids: Int): ReadOnlyProperty<Dialog, Li
  *
  * @throws ClassCastException if one or more view can't be casted to specified class
  */
-fun <V : View> Dialog.viewsOptional(vararg @IdRes ids: Int): ReadOnlyProperty<Dialog, List<V?>>
-        = optionalViews(this::viewProvider, ids)
-
-
+fun <V :View> Dialog.viewsOptional(vararg @IdRes ids :Int) :ReadOnlyProperty<Dialog, List<V?>> = optionalViews(this::viewProvider, ids)
 //=============================
 //      ViewFinderProvider
 //=============================
-
 /**
  * Binds view with specified `id` into read-only property of ViewFinderProvider or throws exception
  *
@@ -214,8 +189,7 @@ fun <V : View> Dialog.viewsOptional(vararg @IdRes ids: Int): ReadOnlyProperty<Di
  * @throws IllegalStateException if view isn't found
  * @throws ClassCastException if view can't be casted to specified class
  */
-fun <V : View> ViewFinderProvider.view(@IdRes id: Int): ReadOnlyProperty<ViewFinderProvider, V>
-        = requiredView(this, this::genericViewFinder, id)
+fun <V :View> ViewFinderProvider.view(@IdRes id :Int) :ReadOnlyProperty<ViewFinderProvider, V> = requiredView(this, this::genericViewFinder, id)
 
 /**
  * Binds view with specified `id` or null into nullable read-only property of ViewFinderProvider
@@ -224,8 +198,7 @@ fun <V : View> ViewFinderProvider.view(@IdRes id: Int): ReadOnlyProperty<ViewFin
  *
  * @throws ClassCastException if view can't be casted to specified class
  */
-fun <V : View> ViewFinderProvider.viewOptional(@IdRes id: Int): ReadOnlyProperty<ViewFinderProvider, V?>
-        = optionalView(this::genericViewFinder, id)
+fun <V :View> ViewFinderProvider.viewOptional(@IdRes id :Int) :ReadOnlyProperty<ViewFinderProvider, V?> = optionalView(this::genericViewFinder, id)
 
 /**
  * Binds views with specified `id` into read-only property of ViewFinderProvider or throws exception
@@ -235,8 +208,7 @@ fun <V : View> ViewFinderProvider.viewOptional(@IdRes id: Int): ReadOnlyProperty
  * @throws IllegalStateException if view isn't found
  * @throws ClassCastException if one or more view can't be casted to specified class
  */
-fun <V : View> ViewFinderProvider.views(vararg @IdRes ids: Int): ReadOnlyProperty<ViewFinderProvider, List<V>>
-        = requiredViews(this, this::genericViewFinder, ids)
+fun <V :View> ViewFinderProvider.views(vararg @IdRes ids :Int) :ReadOnlyProperty<ViewFinderProvider, List<V>> = requiredViews(this, this::genericViewFinder, ids)
 
 /**
  * Binds views with specified `id` or null into read-only property of ViewFinderProvider.
@@ -246,51 +218,50 @@ fun <V : View> ViewFinderProvider.views(vararg @IdRes ids: Int): ReadOnlyPropert
  *
  * @throws ClassCastException if one or more view can't be casted to specified class
  */
-fun <V : View> ViewFinderProvider.viewsOptional(vararg @IdRes ids: Int): ReadOnlyProperty<ViewFinderProvider, List<V?>>
-        = optionalViews(this::genericViewFinder, ids)
-
+fun <V :View> ViewFinderProvider.viewsOptional(vararg @IdRes ids :Int) :ReadOnlyProperty<ViewFinderProvider, List<V?>> = optionalViews(this::genericViewFinder, ids)
 
 @RestrictTo(RestrictTo.Scope.LIBRARY_GROUP)
-inline fun <V : View> requiredView(component: Any,
-                                   crossinline finder: (KProperty<*>) -> ViewFinder<V>,
-                                   @IdRes id: Int): ReadOnlyProperty<Any, V> {
-
-    return Required { property -> finder(property).invoke(id) ?: defaultViewAbsence(component, id, property) }
-}
-
-@RestrictTo(RestrictTo.Scope.LIBRARY_GROUP)
-inline fun <V : View> optionalView(crossinline finder: (KProperty<*>) -> ViewFinder<V>,
-                                   @IdRes id: Int): ReadOnlyProperty<Any, V?> {
-
-    return Required { property -> finder(property).invoke(id) }
-}
-
-@RestrictTo(RestrictTo.Scope.LIBRARY_GROUP)
-inline fun <V : View> requiredViews(component: Any,
-                                    crossinline finder: (KProperty<*>) -> ViewFinder<V>,
-                                    @IdRes ids: IntArray): ReadOnlyProperty<Any, List<V>> {
-
-    return Required { property ->
-        val viewProvider = finder(property)
-        ids.map { id -> viewProvider.invoke(id) ?: findAbsentViewsAndThrow(component, viewProvider, ids, property) }
+inline fun <V :View> requiredView(component :Any,
+    crossinline finder :(KProperty<*>) -> ViewFinder<V>,
+    @IdRes id :Int) :ReadOnlyProperty<Any, V> {
+    return Required {property ->
+        finder(property).invoke(id) ?: defaultViewAbsence(component, id, property)
     }
 }
 
 @RestrictTo(RestrictTo.Scope.LIBRARY_GROUP)
-inline fun <V : View> optionalViews(crossinline finder: (KProperty<*>) -> ViewFinder<V>,
-                                    @IdRes ids: IntArray): ReadOnlyProperty<Any, List<V?>> {
-    return Required { property ->
+inline fun <V :View> optionalView(crossinline finder :(KProperty<*>) -> ViewFinder<V>,
+    @IdRes id :Int) :ReadOnlyProperty<Any, V?> {
+    return Required {property -> finder(property).invoke(id)}
+}
+
+@RestrictTo(RestrictTo.Scope.LIBRARY_GROUP)
+inline fun <V :View> requiredViews(component :Any,
+    crossinline finder :(KProperty<*>) -> ViewFinder<V>,
+    @IdRes ids :IntArray) :ReadOnlyProperty<Any, List<V>> {
+    return Required {property ->
         val viewProvider = finder(property)
-        ids.map { id -> viewProvider.invoke(id) }
+        ids.map {id ->
+            viewProvider.invoke(id)
+                ?: findAbsentViewsAndThrow(component, viewProvider, ids, property)
+        }
     }
 }
 
 @RestrictTo(RestrictTo.Scope.LIBRARY_GROUP)
-inline fun findAbsentViewsAndThrow(component: Any,
-                                   viewFinder: ViewFinder<View>,
-                                   ids: IntArray,
-                                   property: KProperty<*>): Nothing {
+inline fun <V :View> optionalViews(crossinline finder :(KProperty<*>) -> ViewFinder<V>,
+    @IdRes ids :IntArray) :ReadOnlyProperty<Any, List<V?>> {
+    return Required {property ->
+        val viewProvider = finder(property)
+        ids.map {id -> viewProvider.invoke(id)}
+    }
+}
 
-    val absentIds = ids.filter { id -> viewFinder.invoke(id) == null }
+@RestrictTo(RestrictTo.Scope.LIBRARY_GROUP)
+inline fun findAbsentViewsAndThrow(component :Any,
+    viewFinder :ViewFinder<View>,
+    ids :IntArray,
+    property :KProperty<*>) :Nothing {
+    val absentIds = ids.filter {id -> viewFinder.invoke(id) == null}
     defaultViewsAbsence(component, absentIds, property)
 }

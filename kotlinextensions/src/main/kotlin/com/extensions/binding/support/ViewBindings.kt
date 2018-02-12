@@ -2,7 +2,11 @@ package com.extensions.binding.support
 
 import android.support.annotation.IdRes
 import android.view.View
-import com.extensions.binding.*
+import com.extensions.binding.ViewFinder
+import com.extensions.binding.optionalView
+import com.extensions.binding.optionalViews
+import com.extensions.binding.requiredView
+import com.extensions.binding.requiredViews
 import kotlin.properties.ReadOnlyProperty
 import kotlin.reflect.KProperty
 import android.support.v4.app.Fragment as SupportFragment
@@ -10,17 +14,15 @@ import android.support.v4.app.Fragment as SupportFragment
 /**
  * Support
  */
-private fun ensureFragmentView(fragment: SupportFragment, property: KProperty<*>): View {
-    return fragment.view ?: throw IllegalStateException("Fragment hasn't view. Do you access to property '${property.name}' before 'onViewCreated'?")
+private fun ensureFragmentView(fragment :SupportFragment, property :KProperty<*>) :View {
+    return fragment.view
+        ?: throw IllegalStateException("Fragment hasn't view. Do you access to property '${property.name}' before 'onViewCreated'?")
 }
 
-private fun <V : View> SupportFragment.viewProvider(property: KProperty<*>): ViewFinder<V>
-        = { ensureFragmentView(this, property).findViewById(it) as V? }
-
+private fun <V :View> SupportFragment.viewProvider(property :KProperty<*>) :ViewFinder<V> = {ensureFragmentView(this, property).findViewById(it) as V?}
 //=============================
 //      SupportFragment
 //=============================
-
 /**
  * Binds view with specified `id` into read-only property of android.support.v4.app.Fragment or throws exception
  *
@@ -29,8 +31,7 @@ private fun <V : View> SupportFragment.viewProvider(property: KProperty<*>): Vie
  * @throws IllegalStateException if view isn't found
  * @throws ClassCastException if view can't be casted to specified class
  */
-fun <V : View> SupportFragment.view(@IdRes id: Int): ReadOnlyProperty<SupportFragment, V>
-        = requiredView(this, this::viewProvider, id)
+fun <V :View> SupportFragment.view(@IdRes id :Int) :ReadOnlyProperty<SupportFragment, V> = requiredView(this, this::viewProvider, id)
 
 /**
  * Binds view with specified `id` or null into nullable read-only property of android.support.v4.app.Fragment
@@ -39,8 +40,7 @@ fun <V : View> SupportFragment.view(@IdRes id: Int): ReadOnlyProperty<SupportFra
  *
  * @throws ClassCastException if view can't be casted to specified class
  */
-fun <V : View> SupportFragment.viewOptional(@IdRes id: Int): ReadOnlyProperty<SupportFragment, V?>
-        = optionalView(this::viewProvider, id)
+fun <V :View> SupportFragment.viewOptional(@IdRes id :Int) :ReadOnlyProperty<SupportFragment, V?> = optionalView(this::viewProvider, id)
 
 /**
  * Binds views with specified `id` into read-only property of android.support.v4.app.Fragment or throws exception
@@ -50,8 +50,7 @@ fun <V : View> SupportFragment.viewOptional(@IdRes id: Int): ReadOnlyProperty<Su
  * @throws IllegalStateException if view isn't found
  * @throws ClassCastException if one or more view can't be casted to specified class
  */
-fun <V : View> SupportFragment.views(vararg @IdRes ids: Int): ReadOnlyProperty<SupportFragment, List<V>>
-        = requiredViews(this, this::viewProvider, ids)
+fun <V :View> SupportFragment.views(vararg @IdRes ids :Int) :ReadOnlyProperty<SupportFragment, List<V>> = requiredViews(this, this::viewProvider, ids)
 
 /**
  * Binds views with specified `id` or null into read-only property of android.support.v4.app.Fragment.
@@ -61,5 +60,4 @@ fun <V : View> SupportFragment.views(vararg @IdRes ids: Int): ReadOnlyProperty<S
  *
  * @throws ClassCastException if one or more view can't be casted to specified class
  */
-fun <V : View> SupportFragment.viewsOptional(vararg @IdRes ids: Int): ReadOnlyProperty<SupportFragment, List<V?>>
-        = optionalViews(this::viewProvider, ids)
+fun <V :View> SupportFragment.viewsOptional(vararg @IdRes ids :Int) :ReadOnlyProperty<SupportFragment, List<V?>> = optionalViews(this::viewProvider, ids)

@@ -1,7 +1,12 @@
 package com.extensions.badge
 
 import android.content.Context
-import android.graphics.*
+import android.graphics.Bitmap
+import android.graphics.BitmapFactory
+import android.graphics.Canvas
+import android.graphics.Paint
+import android.graphics.Rect
+import android.graphics.RectF
 import android.graphics.drawable.BitmapDrawable
 import android.graphics.drawable.Drawable
 import android.support.annotation.ColorInt
@@ -13,24 +18,26 @@ import android.support.v4.content.res.ResourcesCompat
 import android.text.TextPaint
 import com.extensions.R
 
-
 class DrawableBadge private constructor(val context :Context,
-                                        @ColorInt val textColor :Int,
-                                        @ColorInt val badgeColor :Int,
-                                        @ColorInt val badgeBorderColor :Int,
-                                        val badgeBorderSize :Float,
-                                        val badgeSize :Float,
-                                        val badgePosition : BadgePosition,
-                                        val bitmap :Bitmap,
-                                        val isShowBorder :Boolean,
-                                        val maximumCounter :Int) {
+    @ColorInt val textColor :Int,
+    @ColorInt val badgeColor :Int,
+    @ColorInt val badgeBorderColor :Int,
+    val badgeBorderSize :Float,
+    val badgeSize :Float,
+    val badgePosition :BadgePosition,
+    val bitmap :Bitmap,
+    val isShowBorder :Boolean,
+    val maximumCounter :Int) {
     class Builder(private val context :Context) {
-        @ColorInt private var textColor :Int? = null
-        @ColorInt private var badgeColor :Int? = null
-        @ColorInt private var badgeBorderColor :Int? = null
+        @ColorInt
+        private var textColor :Int? = null
+        @ColorInt
+        private var badgeColor :Int? = null
+        @ColorInt
+        private var badgeBorderColor :Int? = null
         private var badgeBorderSize :Float? = null
         private var badgeSize :Float? = null
-        private var badgePosition : BadgePosition? = null
+        private var badgePosition :BadgePosition? = null
         private var bitmap :Bitmap? = null
         private var isShowBorder :Boolean? = null
         private var maximumCounter :Int? = null
@@ -58,10 +65,10 @@ class DrawableBadge private constructor(val context :Context,
         fun badgeBorderColor(@ColorRes badgeBorderColorRes :Int) = apply {this.badgeBorderColor = ContextCompat.getColor(context, badgeBorderColorRes)}
         fun badgeBorderSize(@DimenRes badgeBorderSize :Int) = apply {this.badgeBorderSize = context.resources.getDimensionPixelOffset(badgeBorderSize).toFloat()}
         fun badgeSize(@DimenRes badgeSize :Int) = apply {this.badgeSize = context.resources.getDimensionPixelOffset(badgeSize).toFloat()}
-        fun badgePosition(badgePosition : BadgePosition) = apply {this.badgePosition = badgePosition}
+        fun badgePosition(badgePosition :BadgePosition) = apply {this.badgePosition = badgePosition}
         fun showBorder(isShowBorder :Boolean) = apply {this.isShowBorder = isShowBorder}
         fun maximumCounter(maximumCounter :Int) = apply {this.maximumCounter = maximumCounter}
-        fun build() : DrawableBadge {
+        fun build() :DrawableBadge {
             if(bitmap == null) throw IllegalArgumentException("Badge drawable/bitmap can not be null.")
             if(badgeSize == null) badgeSize(R.dimen.default_badge_size)
             if(textColor == null) textColor(android.R.color.white)

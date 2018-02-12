@@ -36,6 +36,10 @@ android {
         enabled = true
     }
 
+    lintOptions {
+        abortOnError false
+    }
+
     androidExtensions {
         experimental = true
     }
@@ -114,6 +118,9 @@ dependencies {
     implementation deps.lifecycle.extensions
     kapt deps.lifecycle.compiler
 
+    //Location
+    implementation deps.googleGms.location
+
     // RxJava
     implementation deps.rx.java2
     implementation(deps.rx.android) {
@@ -121,3 +128,10 @@ dependencies {
     }
 }
 
+ext {
+    PUBLISH_GROUP_ID = 'com.kevadiyakrunalk'
+    PUBLISH_ARTIFACT_ID = 'kotlinextensions'
+    PUBLISH_VERSION = '1.0.0'
+}
+
+apply from: '../gradle/android-release-aar.gradle'

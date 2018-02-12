@@ -17,7 +17,7 @@ class MyLocationUpdateObserver(var context: Context, var isFusedLocationApi: Boo
     @OnLifecycleEvent(Lifecycle.Event.ON_RESUME)
     fun onResume() {
         val serviceIntent = Intent(context, Locations::class.java)
-        serviceIntent.putExtra(Locations.ARG_FUSED_LOCATION_API, isFusedLocationApi)
+        serviceIntent.putExtra(Locations.ARG_FUSED_LOCATION, isFusedLocationApi)
         context.startService(serviceIntent)
         context.bindService(serviceIntent, mConnection, Context.BIND_AUTO_CREATE)
     }
@@ -38,11 +38,15 @@ class MyLocationUpdateObserver(var context: Context, var isFusedLocationApi: Boo
             mBound = true
 
             if (mBound)
-                locationService.setLocationCallback(listener)
+                init()
         }
 
         override fun onServiceDisconnected(arg0: ComponentName) {
             mBound = false
         }
+    }
+
+    private fun init() {
+        locationService.setLocationCallback(listener)
     }
 }
