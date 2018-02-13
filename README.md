@@ -15,7 +15,7 @@
 * Advance level setup Gradle like (version, source, signature, flavour, buildType, dependencies, repositories).
 * LiveData.
 * ViewModel.
-* DataBianding.
+* DataBinding.
 * Room.
 * Lifecycle Architecture Components.
 * Retrofit 2 with dynamic url change without create retrofit object and CallbackWrapper to customise response.
