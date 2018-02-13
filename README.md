@@ -1,3 +1,7 @@
+
+[![API](https://img.shields.io/badge/API-16%2B-red.svg?style=flat)](https://android-arsenal.com/api?level=16)
+[![Build Status](https://travis-ci.org/wupdigital/android-maven-publish.svg?branch=master)](https://github.com/Krunal-Kevadiya/Kotlin-Extension)
+[![codebeat badge](https://codebeat.co/badges/f6612a30-4467-49b5-860f-98f9b34b8975)](https://codebeat.co/projects/github-com-Krunal-Kevadiya/Kotlin-Extension-master)
 # **Small library that contains common extensions for Android**
 
 * Provide the shortest way to do things.
