@@ -2,7 +2,6 @@
 [![API](https://img.shields.io/badge/API-16%2B-red.svg?style=flat)](https://android-arsenal.com/api?level=16)
 [![Build Status](https://travis-ci.org/wupdigital/android-maven-publish.svg?branch=master)](https://github.com/Krunal-Kevadiya/Kotlin-Extension)
 [ ![Download](https://api.bintray.com/packages/kevadiyakrunalk/Kotlin-Extension/kotlin-extension/images/download.svg) ](https://bintray.com/kevadiyakrunalk/Kotlin-Extension/kotlin-extension/_latestVersion)
-[![License](https://img.shields.io/badge/License-Apache%202.0-green.svg)](LICENSE)
 
 # **Small library that contains common extensions for Android**
 
