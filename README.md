@@ -23,7 +23,7 @@
 * RxJava 2.
 
 # Add Build.gradle file
-```groovy
+```gradle
 //Add Dependencies for app level build.gradle
 repositories {
     jcenter()
