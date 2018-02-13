@@ -23,7 +23,7 @@
 * RxJava 2.
 
 # Add Build.gradle file
-```gradle
+```groovy
 //Add Dependencies for app level build.gradle
 repositories {
     jcenter()
@@ -31,4 +31,13 @@ repositories {
 dependencies {
   implementation 'com.kevadiyakrunalk:kotlinextensions:1.0.0'
 }
+```
+or Maven:
+```xml
+<dependency>
+    <groupId>com.kevadiyakrunalk</groupId>
+    <artifactId>kotlinextensions</artifactId>
+    <version>1.0.0</version>
+    <type>pom</type>
+</dependency>
 ```
