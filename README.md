@@ -29,7 +29,7 @@ repositories {
     jcenter()
 }
 dependencies {
-  implementation 'com.kevadiyakrunalk:kotlinextensions:1.0.0'
+  implementation 'com.simform:kotlinextensions:1.0.0'
 }
 ```
 or Maven:
