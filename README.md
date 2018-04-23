@@ -35,7 +35,7 @@ dependencies {
 or Maven:
 ```xml
 <dependency>
-    <groupId>com.kevadiyakrunalk</groupId>
+    <groupId>com.simform</groupId>
     <artifactId>kotlinextensions</artifactId>
     <version>1.0.0</version>
     <type>pom</type>
